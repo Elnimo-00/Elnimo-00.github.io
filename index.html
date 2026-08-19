@@ -54,19 +54,6 @@
 
     .hero { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 3.5rem; }
 
-    .hero-status {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'DM Mono', monospace; font-size: 12px;
-      color: var(--muted); margin-bottom: 2rem;
-    }
-
-    .dot {
-      width: 7px; height: 7px; background: #4caf50;
-      border-radius: 50%; animation: pulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
     h1 {
       font-size: clamp(2rem, 5vw, 2.8rem);
       font-weight: 300; line-height: 1.15;
@@ -91,24 +78,64 @@
 
     .certs-row {
       max-width: 720px; margin: 0 auto;
-      padding: 0 2rem 3.5rem;
-      display: flex; gap: 1.35rem; flex-wrap: wrap; align-items: flex-start;
+      padding: 0 2rem 4rem;
+      display: flex; gap: 1.6rem; flex-wrap: wrap; align-items: flex-start;
     }
 
     .cert {
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
-      width: 66px; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; align-items: center; gap: 9px;
+      width: 92px; text-decoration: none; color: inherit;
       transition: opacity 0.2s;
     }
     a.cert:hover { opacity: 0.62; }
 
-    .cert img { width: 52px; height: 52px; object-fit: contain; display: block; }
+    .cert img { width: 74px; height: 74px; object-fit: contain; display: block; }
 
     .cert-label {
       font-family: 'DM Mono', monospace; font-size: 10px;
       color: var(--muted); letter-spacing: 0.03em;
       text-align: center; line-height: 1.35;
     }
+
+    .section-label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.25rem;
+    }
+
+    /* ---- experience / education ---- */
+
+    .cv-section { max-width: 720px; margin: 0 auto; padding: 0 2rem 3.5rem; }
+
+    .cv-item {
+      display: grid; grid-template-columns: 1fr auto; gap: 1rem;
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .cv-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .cv-main { display: flex; flex-direction: column; gap: 3px; }
+    .cv-role { font-size: 14px; font-weight: 400; }
+    .cv-org { font-size: 13px; color: var(--muted); }
+    .cv-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 52ch; margin-top: 4px; }
+
+    .cv-date {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      color: var(--muted); white-space: nowrap; padding-top: 2px;
+    }
+
+    /* placeholder rows — replace the contents and delete this class */
+    .tbd { opacity: 0.5; }
+    .tbd .cv-role::after {
+      content: 'placeholder';
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border: 1px solid var(--border); border-radius: 2px;
+      padding: 1px 5px; margin-left: 8px; color: var(--muted);
+      vertical-align: middle;
+    }
+
+    /* ---- project tabs ---- */
 
     .tabs-outer { max-width: 960px; margin: 0 auto; padding: 0 2rem 6rem; }
 
@@ -123,7 +150,7 @@
     .tab-btn {
       font-family: 'DM Mono', monospace; font-size: 12px;
       letter-spacing: 0.04em;
-      padding: 0.75rem 1.2rem;
+      padding: 0.75rem 0.78rem;
       background: none; border: none; cursor: pointer;
       color: var(--muted);
       border-bottom: 2px solid transparent;
@@ -153,41 +180,14 @@
       max-width: 40ch; font-weight: 300; text-align: right;
     }
 
-    .section-label {
-      font-family: 'DM Mono', monospace; font-size: 10px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.25rem;
-    }
-
     .proj-list { margin-bottom: 3rem; }
 
-    .proj-item {
-      display: grid; grid-template-columns: 1fr auto; gap: 1rem;
-      padding: 1.5rem 0;
-      border-top: 1px solid var(--border);
-      text-decoration: none; color: inherit;
-      transition: opacity 0.2s;
+    /* empty state until real projects go in */
+    .proj-empty {
+      border: 1px dashed var(--border); border-radius: 4px;
+      padding: 1.5rem; margin-bottom: 3rem;
+      font-size: 13px; color: var(--muted); font-weight: 300;
     }
-    .proj-item:last-child { border-bottom: 1px solid var(--border); }
-    .proj-item:hover { opacity: 0.6; }
-
-    .proj-left { display: flex; flex-direction: column; gap: 5px; }
-    .proj-name { font-size: 14px; font-weight: 400; }
-    .proj-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 52ch; margin: 0; }
-
-    .proj-tags { display: flex; gap: 5px; margin-top: 6px; flex-wrap: wrap; }
-
-    .tag {
-      font-family: 'DM Mono', monospace; font-size: 10px;
-      padding: 2px 7px; background: var(--tag-bg);
-      color: var(--tag-text); border-radius: 2px;
-    }
-
-    .proj-arrow {
-      font-size: 16px; color: var(--border);
-      align-self: center; transition: transform 0.2s, color 0.2s;
-    }
-    .proj-item:hover .proj-arrow { transform: translate(3px,-3px); color: var(--text); }
 
     .two-col {
       display: grid;
@@ -197,19 +197,6 @@
 
     .skill-col ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
     .skill-col ul li { font-size: 14px; color: var(--text); font-weight: 300; }
-
-    .highlight-card {
-      border: 1px solid var(--border); border-radius: 4px;
-      padding: 1.25rem 1.5rem; margin-bottom: 2.5rem;
-    }
-
-    .highlight-card .hc-label {
-      font-family: 'DM Mono', monospace; font-size: 10px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 0.5rem;
-    }
-
-    .highlight-card p { font-size: 14px; color: var(--muted); font-weight: 300; margin: 0; }
 
     footer {
       max-width: 720px; margin: 0 auto;
@@ -222,9 +209,20 @@
 
     @media (max-width: 640px) {
       nav { padding: 1rem; }
-      .hero, .certs-row, .tabs-outer { padding-left: 1rem; padding-right: 1rem; }
+      .hero, .certs-row, .tabs-outer, .cv-section { padding-left: 1rem; padding-right: 1rem; }
       .panel-header { flex-direction: column; }
       .panel-summary { text-align: left; max-width: none; }
+      .cv-item { grid-template-columns: 1fr; }
+      .cv-date { padding-top: 0; }
+    }
+
+    /* below ~900px the 7 tabs no longer fit — show a thin scrollbar so the
+       overflowing tabs are discoverable instead of silently clipped */
+    @media (max-width: 900px) {
+      .tab-bar { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+      .tab-bar::-webkit-scrollbar { display: block; height: 3px; }
+      .tab-bar::-webkit-scrollbar-track { background: transparent; }
+      .tab-bar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
     }
   </style>
 </head>
@@ -233,21 +231,19 @@
 <nav>
   <a href="#" class="logo">NKT</a>
   <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#work">Work</a></li>
-    <li><a href="mailto:you@email.com">Contact</a></li>
     <li><a href="resume.pdf" target="_blank">Résumé ↗</a></li>
   </ul>
 </nav>
 
-<div class="hero" id="work">
-  <div class="hero-status"><span class="dot"></span> Open to new roles</div>
-  <h1>Nimal Kurien Thomas<br><em>security & engineering</em></h1>
+<div class="hero">
+  <h1>Nimal Kurien Thomas<br><em>security &amp; engineering</em></h1>
   <p>I work across the stack — securing infrastructure, hunting threats, breaking applications, and building intelligent systems.</p>
-  <p>Based in College Park, MD. Open to remote and hybrid roles.</p>
+  <p>Based in College Park, MD. Open to relocation and remote.</p>
   <div class="hero-links">
-    <a href="https://github.com/yourusername" target="_blank">GitHub ↗</a>
+    <a href="https://github.com/Elnimo-00" target="_blank">GitHub ↗</a>
     <a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank">LinkedIn ↗</a>
-    <a href="mailto:you@email.com">Email</a>
     <a href="resume.pdf" target="_blank">Résumé ↗</a>
   </div>
 </div>
@@ -257,6 +253,12 @@
      target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+) — verify with OffSec">
     <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
     <span class="cert-label">OSCP+</span>
+  </a>
+
+  <a class="cert" href="https://credentials.offsec.com/d73c3373-4e0c-4289-a8f8-cc684b368029#acc.bukZvz1o"
+     target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP) — verify with OffSec">
+    <img src="assets/badges/oscp.png" alt="OffSec Certified Professional (OSCP)" />
+    <span class="cert-label">OSCP</span>
   </a>
 
   <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
@@ -278,49 +280,100 @@
   </a>
 </div>
 
-<div class="tabs-outer">
+<!--
+  EXPERIENCE — replace the placeholder row(s) below. Copy this block per entry
+  and delete class="tbd" once the contents are real:
+
+  <div class="cv-item">
+    <div class="cv-main">
+      <span class="cv-role">Security Engineer Intern</span>
+      <span class="cv-org">Company Name</span>
+      <p class="cv-desc">One or two lines on what you actually did.</p>
+    </div>
+    <span class="cv-date">Jun 2025 — Aug 2025</span>
+  </div>
+-->
+<section class="cv-section" id="experience">
+  <p class="section-label">Experience</p>
+  <div class="cv-item tbd">
+    <div class="cv-main">
+      <span class="cv-role">Role title</span>
+      <span class="cv-org">Organisation</span>
+      <p class="cv-desc">A line or two on scope and what you were responsible for.</p>
+    </div>
+    <span class="cv-date">—</span>
+  </div>
+  <div class="cv-item tbd">
+    <div class="cv-main">
+      <span class="cv-role">Role title</span>
+      <span class="cv-org">Organisation</span>
+      <p class="cv-desc">A line or two on scope and what you were responsible for.</p>
+    </div>
+    <span class="cv-date">—</span>
+  </div>
+</section>
+
+<!-- EDUCATION — same structure as above. -->
+<section class="cv-section" id="education">
+  <p class="section-label">Education</p>
+  <div class="cv-item tbd">
+    <div class="cv-main">
+      <span class="cv-role">Degree</span>
+      <span class="cv-org">University</span>
+      <p class="cv-desc">Focus area, thesis, or relevant coursework.</p>
+    </div>
+    <span class="cv-date">—</span>
+  </div>
+  <div class="cv-item tbd">
+    <div class="cv-main">
+      <span class="cv-role">Degree</span>
+      <span class="cv-org">University</span>
+      <p class="cv-desc">Focus area, thesis, or relevant coursework.</p>
+    </div>
+    <span class="cv-date">—</span>
+  </div>
+</section>
+
+<div class="tabs-outer" id="work">
+  <p class="section-label">Work</p>
   <div class="tab-bar" role="tablist">
-    <button class="tab-btn active" data-tab="devsecops">DevSecOps</button>
-    <button class="tab-btn" data-tab="dfir">DFIR</button>
+    <button class="tab-btn active" data-tab="cloud">Cloud &amp; Cloud Security</button>
+    <button class="tab-btn" data-tab="devsecops">DevOps / DevSecOps</button>
     <button class="tab-btn" data-tab="pentest">Pentesting</button>
     <button class="tab-btn" data-tab="mlai">ML / AI</button>
     <button class="tab-btn" data-tab="api">API</button>
-    <button class="tab-btn" data-tab="cloud">Cloud</button>
+    <button class="tab-btn" data-tab="binexp">Binary Exploitation</button>
+    <button class="tab-btn" data-tab="dfir">DFIR</button>
   </div>
 
-  <!-- DEVSECOPS -->
-  <div class="tab-panel active" id="tab-devsecops">
+  <!-- CLOUD -->
+  <div class="tab-panel active" id="tab-cloud">
     <div class="panel-header">
-      <h2>DevSecOps</h2>
+      <h2>Cloud &amp; Cloud Security</h2>
+      <p class="panel-summary">Securing cloud-native environments — IAM, posture management, and runtime defence.</p>
+    </div>
+    <p class="section-label">Projects</p>
+    <div class="proj-empty">Projects for this area are on the way.</div>
+    <div class="two-col">
+      <div class="skill-col">
+        <p class="section-label">Platforms</p>
+        <ul><li>AWS (primary)</li><li>GCP</li><li>Kubernetes / EKS</li><li>Terraform / Pulumi</li><li>Cloudflare</li></ul>
+      </div>
+      <div class="skill-col">
+        <p class="section-label">Focus</p>
+        <ul><li>IAM &amp; least-privilege</li><li>CSPM &amp; posture management</li><li>Cloud workload protection</li><li>Serverless security</li><li>CIS benchmarks / SOC2</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEVOPS / DEVSECOPS -->
+  <div class="tab-panel" id="tab-devsecops">
+    <div class="panel-header">
+      <h2>DevOps / DevSecOps</h2>
       <p class="panel-summary">Shifting security left — baking it into pipelines, containers, and delivery workflows.</p>
     </div>
     <p class="section-label">Projects</p>
-    <div class="proj-list">
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Pipeline Security Scanner</span>
-          <p class="proj-desc">Automated SAST/DAST integration for GitHub Actions — catches vulns before merge.</p>
-          <div class="proj-tags"><span class="tag">GitHub Actions</span><span class="tag">Semgrep</span><span class="tag">Python</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Container Hardening Toolkit</span>
-          <p class="proj-desc">Opinionated Dockerfile linter and runtime policy generator for production K8s clusters.</p>
-          <div class="proj-tags"><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">OPA</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Secrets Detection CI Hook</span>
-          <p class="proj-desc">Pre-commit and CI-level hook to prevent secrets from hitting remote branches.</p>
-          <div class="proj-tags"><span class="tag">truffleHog</span><span class="tag">pre-commit</span><span class="tag">Go</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-    </div>
+    <div class="proj-empty">Projects for this area are on the way.</div>
     <div class="two-col">
       <div class="skill-col">
         <p class="section-label">Tools</p>
@@ -333,84 +386,18 @@
     </div>
   </div>
 
-  <!-- DFIR -->
-  <div class="tab-panel" id="tab-dfir">
-    <div class="panel-header">
-      <h2>DFIR</h2>
-      <p class="panel-summary">Digital forensics and incident response — finding what happened, how, and when.</p>
-    </div>
-    <div class="highlight-card">
-      <p class="hc-label">Notable response</p>
-      <p>Responded to a ransomware incident across a 200-node environment. Identified patient zero, traced lateral movement, and produced a full timeline within 72 hours. Replace this with your real highlight.</p>
-    </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-list">
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Memory Forensics Toolkit</span>
-          <p class="proj-desc">Volatility-based automation for extracting IOCs and building attacker timelines from memory dumps.</p>
-          <div class="proj-tags"><span class="tag">Volatility 3</span><span class="tag">Python</span><span class="tag">YARA</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Log Correlation Engine</span>
-          <p class="proj-desc">Lightweight SIEM-like pipeline for correlating Windows event logs and detecting anomalies.</p>
-          <div class="proj-tags"><span class="tag">Elastic Stack</span><span class="tag">Sigma</span><span class="tag">Python</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-    </div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Tools</p>
-        <ul><li>Autopsy / FTK</li><li>Volatility 3</li><li>Velociraptor</li><li>Elastic / Splunk</li><li>Wireshark / Zeek</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Areas</p>
-        <ul><li>Windows forensics (MFT, registry)</li><li>Memory analysis</li><li>Malware triage</li><li>Network traffic analysis</li><li>Chain of custody</li></ul>
-      </div>
-    </div>
-  </div>
-
   <!-- PENTESTING -->
   <div class="tab-panel" id="tab-pentest">
     <div class="panel-header">
       <h2>Pentesting</h2>
       <p class="panel-summary">Offensive security — finding the holes before the adversary does.</p>
     </div>
-    <p class="section-label">Projects & write-ups</p>
-    <div class="proj-list">
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">HTB / CTF Write-ups</span>
-          <p class="proj-desc">Documented walkthroughs of HackTheBox machines and CTF challenges — methodology, not just flags.</p>
-          <div class="proj-tags"><span class="tag">HackTheBox</span><span class="tag">CTF</span><span class="tag">Write-up</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Custom C2 Framework (Research)</span>
-          <p class="proj-desc">Lightweight command-and-control implementation for understanding detection evasion techniques.</p>
-          <div class="proj-tags"><span class="tag">Go</span><span class="tag">C2</span><span class="tag">Research</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Active Directory Attack Lab</span>
-          <p class="proj-desc">Home lab simulating AD misconfigurations for practicing Kerberoasting, pass-the-hash, and more.</p>
-          <div class="proj-tags"><span class="tag">Active Directory</span><span class="tag">BloodHound</span><span class="tag">PowerShell</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-    </div>
+    <p class="section-label">Projects &amp; write-ups</p>
+    <div class="proj-empty">Projects for this area are on the way.</div>
     <div class="two-col">
       <div class="skill-col">
         <p class="section-label">Tools</p>
-        <ul><li>Burp Suite Pro</li><li>Metasploit</li><li>Nmap / Masscan</li><li>BloodHound / SharpHound</li><li>Impacket</li></ul>
+        <ul><li>Burp Suite</li><li>Metasploit</li><li>Nmap / Masscan</li><li>BloodHound / SharpHound</li><li>Impacket</li></ul>
       </div>
       <div class="skill-col">
         <p class="section-label">Domains</p>
@@ -426,32 +413,7 @@
       <p class="panel-summary">Applying machine learning to security problems and building intelligent systems.</p>
     </div>
     <p class="section-label">Projects</p>
-    <div class="proj-list">
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Network Anomaly Detector</span>
-          <p class="proj-desc">Unsupervised ML model flagging unusual network flows — trained on CICIDS dataset, deployed as a sidecar.</p>
-          <div class="proj-tags"><span class="tag">scikit-learn</span><span class="tag">Python</span><span class="tag">Isolation Forest</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Phishing URL Classifier</span>
-          <p class="proj-desc">Fine-tuned transformer model for real-time phishing detection — 97.4% accuracy on holdout set.</p>
-          <div class="proj-tags"><span class="tag">HuggingFace</span><span class="tag">PyTorch</span><span class="tag">FastAPI</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">LLM Threat Report Summarizer</span>
-          <p class="proj-desc">RAG pipeline that ingests CTI feeds and generates structured analyst briefs automatically.</p>
-          <div class="proj-tags"><span class="tag">LangChain</span><span class="tag">Claude API</span><span class="tag">Chroma</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-    </div>
+    <div class="proj-empty">Projects for this area are on the way.</div>
     <div class="two-col">
       <div class="skill-col">
         <p class="section-label">Stack</p>
@@ -459,7 +421,7 @@
       </div>
       <div class="skill-col">
         <p class="section-label">Focus areas</p>
-        <ul><li>Security-focused ML</li><li>LLM fine-tuning & RAG</li><li>Anomaly & intrusion detection</li><li>NLP for threat intel</li><li>Model red-teaming</li></ul>
+        <ul><li>Security-focused ML</li><li>LLM red-teaming</li><li>Anomaly &amp; intrusion detection</li><li>NLP for threat intel</li><li>Adversarial ML</li></ul>
       </div>
     </div>
   </div>
@@ -471,85 +433,55 @@
       <p class="panel-summary">Designing, securing, and stress-testing APIs — from spec to production.</p>
     </div>
     <p class="section-label">Projects</p>
-    <div class="proj-list">
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">OWASP API Top 10 Lab</span>
-          <p class="proj-desc">Intentionally vulnerable REST API environment for practicing and demonstrating API attack techniques.</p>
-          <div class="proj-tags"><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">OWASP</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">API Gateway with AuthZ Layer</span>
-          <p class="proj-desc">Custom gateway implementing JWT validation, rate limiting, and OPA-based fine-grained authorization.</p>
-          <div class="proj-tags"><span class="tag">Go</span><span class="tag">JWT</span><span class="tag">OPA</span><span class="tag">Redis</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Automated API Fuzzer</span>
-          <p class="proj-desc">Schema-aware fuzzer that generates malformed inputs from OpenAPI specs to surface edge-case bugs.</p>
-          <div class="proj-tags"><span class="tag">Python</span><span class="tag">OpenAPI</span><span class="tag">Schemathesis</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-    </div>
+    <div class="proj-empty">Projects for this area are on the way.</div>
     <div class="two-col">
       <div class="skill-col">
-        <p class="section-label">Tools & specs</p>
+        <p class="section-label">Tools &amp; specs</p>
         <ul><li>Burp Suite (API testing)</li><li>Postman / Insomnia</li><li>OpenAPI / Swagger</li><li>GraphQL</li><li>gRPC / Protobuf</li></ul>
       </div>
       <div class="skill-col">
         <p class="section-label">Areas</p>
-        <ul><li>OWASP API Top 10</li><li>Auth patterns (OAuth2, JWT)</li><li>Rate limiting & abuse prevention</li><li>API fuzzing & testing</li><li>REST & async API design</li></ul>
+        <ul><li>OWASP API Top 10</li><li>Auth patterns (OAuth2, JWT)</li><li>Rate limiting &amp; abuse prevention</li><li>API fuzzing &amp; testing</li><li>REST &amp; async API design</li></ul>
       </div>
     </div>
   </div>
 
-  <!-- CLOUD -->
-  <div class="tab-panel" id="tab-cloud">
+  <!-- BINARY EXPLOITATION -->
+  <div class="tab-panel" id="tab-binexp">
     <div class="panel-header">
-      <h2>Cloud Security</h2>
-      <p class="panel-summary">Securing cloud-native environments — IAM, posture management, and runtime defence.</p>
+      <h2>Binary Exploitation</h2>
+      <p class="panel-summary">Memory corruption, reverse engineering, and turning crashes into control.</p>
     </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-list">
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">AWS CSPM Dashboard</span>
-          <p class="proj-desc">Pulls AWS Config and Security Hub findings, surfaces a prioritized remediation backlog.</p>
-          <div class="proj-tags"><span class="tag">AWS</span><span class="tag">Terraform</span><span class="tag">Python</span><span class="tag">Security Hub</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Least-Privilege IAM Auditor</span>
-          <p class="proj-desc">Static analyser comparing IAM policies against CloudTrail to surface over-permissive roles.</p>
-          <div class="proj-tags"><span class="tag">AWS IAM</span><span class="tag">CloudTrail</span><span class="tag">Python</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-      <a class="proj-item" href="https://github.com/yourusername/project" target="_blank">
-        <div class="proj-left">
-          <span class="proj-name">Kubernetes Runtime Security</span>
-          <p class="proj-desc">Falco rules and alerting pipeline for detecting anomalous container behaviour in production clusters.</p>
-          <div class="proj-tags"><span class="tag">Kubernetes</span><span class="tag">Falco</span><span class="tag">Prometheus</span></div>
-        </div>
-        <span class="proj-arrow">↗</span>
-      </a>
-    </div>
+    <p class="section-label">Projects &amp; write-ups</p>
+    <div class="proj-empty">Projects for this area are on the way.</div>
     <div class="two-col">
       <div class="skill-col">
-        <p class="section-label">Platforms</p>
-        <ul><li>AWS (primary)</li><li>GCP</li><li>Kubernetes / EKS</li><li>Terraform / Pulumi</li><li>Cloudflare</li></ul>
+        <p class="section-label">Tools</p>
+        <ul><li>GDB / pwndbg</li><li>pwntools</li><li>Ghidra / IDA</li><li>radare2</li><li>AFL++ / libFuzzer</li></ul>
       </div>
       <div class="skill-col">
-        <p class="section-label">Focus</p>
-        <ul><li>IAM & least-privilege</li><li>CSPM & posture management</li><li>Cloud workload protection</li><li>Serverless security</li><li>CIS benchmarks / SOC2</li></ul>
+        <p class="section-label">Areas</p>
+        <ul><li>Stack &amp; heap overflows</li><li>Return-oriented programming</li><li>Format string bugs</li><li>ASLR / NX / canary bypass</li><li>Shellcode development</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DFIR -->
+  <div class="tab-panel" id="tab-dfir">
+    <div class="panel-header">
+      <h2>DFIR</h2>
+      <p class="panel-summary">Digital forensics and incident response — finding what happened, how, and when.</p>
+    </div>
+    <p class="section-label">Projects</p>
+    <div class="proj-empty">Projects for this area are on the way.</div>
+    <div class="two-col">
+      <div class="skill-col">
+        <p class="section-label">Tools</p>
+        <ul><li>Autopsy / FTK</li><li>Volatility 3</li><li>Velociraptor</li><li>Elastic / Splunk</li><li>Wireshark / Zeek</li></ul>
+      </div>
+      <div class="skill-col">
+        <p class="section-label">Areas</p>
+        <ul><li>Windows forensics (MFT, registry)</li><li>Memory analysis</li><li>Malware triage</li><li>Network traffic analysis</li><li>Chain of custody</li></ul>
       </div>
     </div>
   </div>
