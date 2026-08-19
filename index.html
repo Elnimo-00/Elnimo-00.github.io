@@ -92,13 +92,22 @@
     .certs-row {
       max-width: 720px; margin: 0 auto;
       padding: 0 2rem 3.5rem;
-      display: flex; gap: 7px; flex-wrap: wrap;
+      display: flex; gap: 1.35rem; flex-wrap: wrap; align-items: flex-start;
     }
 
-    .cert-badge {
-      font-family: 'DM Mono', monospace; font-size: 11px;
-      padding: 3px 10px; border: 1px solid var(--border);
-      border-radius: 3px; color: var(--muted); letter-spacing: 0.04em;
+    .cert {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      width: 66px; text-decoration: none; color: inherit;
+      transition: opacity 0.2s;
+    }
+    a.cert:hover { opacity: 0.62; }
+
+    .cert img { width: 52px; height: 52px; object-fit: contain; display: block; }
+
+    .cert-label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      color: var(--muted); letter-spacing: 0.03em;
+      text-align: center; line-height: 1.35;
     }
 
     .tabs-outer { max-width: 960px; margin: 0 auto; padding: 0 2rem 6rem; }
@@ -244,12 +253,29 @@
 </div>
 
 <div class="certs-row">
-  <span class="cert-badge">OSCP</span>
-  <span class="cert-badge">CEH</span>
-  <span class="cert-badge">AWS Security</span>
-  <span class="cert-badge">Security+</span>
-  <span class="cert-badge">GCFE</span>
-  <span class="cert-badge">CKS</span>
+  <a class="cert" href="https://credentials.offsec.com/2abd3784-1c12-49ec-8102-0b5d994129b2#acc.ruh2PTEH"
+     target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+) — verify with OffSec">
+    <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
+    <span class="cert-label">OSCP+</span>
+  </a>
+
+  <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
+     target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert — issued Aug 2026, verify on Credly">
+    <img src="assets/badges/htb-coae.png" alt="HTB Certified Offensive AI Expert (HTB COAE)" />
+    <span class="cert-label">HTB COAE</span>
+  </a>
+
+  <a class="cert" href="https://www.credly.com/badges/5f25846e-7da8-4df2-866c-069ec7f005a2"
+     target="_blank" rel="noopener" title="AWS Certified Solutions Architect – Associate — issued Apr 2025, valid to Apr 2028, verify on Credly">
+    <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect – Associate" />
+    <span class="cert-label">AWS SAA</span>
+  </a>
+
+  <a class="cert" href="https://cp.certmetrics.com/CompTIA/en/public/verify/credential/BQFRF02QZEB4QWKK"
+     target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701) — active to Mar 2028, verify with CompTIA">
+    <img src="assets/badges/comptia-secplus.png" alt="CompTIA Security+ ce Certification" />
+    <span class="cert-label">Security+</span>
+  </a>
 </div>
 
 <div class="tabs-outer">
