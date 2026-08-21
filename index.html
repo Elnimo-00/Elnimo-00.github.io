@@ -14,10 +14,10 @@
       --bg: #f9f8f5;
       --surface: #ffffff;
       --text: #1a1a18;
-      --muted: #6b6b67;
+      --muted: #55554f;
       --border: #e2e1dc;
       --tag-bg: #eeeee9;
-      --tag-text: #4a4a47;
+      --tag-text: #403f3b;
       --accent: #b4552d;
 
       --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -67,8 +67,20 @@
     }
 
     .nav-links { list-style: none; display: flex; gap: 2rem; }
-    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 400; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a {
+      position: relative; font-size: 13px; color: var(--muted);
+      text-decoration: none; font-weight: 400; transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
+      background: var(--text); transform: scaleX(0); transform-origin: left center;
+      transition: transform 0.3s var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .nav-links a:hover { color: var(--text); }
+      .nav-links a:hover::after { transform: scaleX(1); }
+    }
 
     .hero { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 3.5rem; }
 
@@ -93,7 +105,7 @@
       border-bottom: 1px solid var(--border);
       padding-bottom: 2px; transition: border-color 0.2s;
     }
-    .hero-links a:hover { border-color: var(--text); }
+    .hero-links a:hover { color: var(--accent); border-color: var(--accent); }
 
     .certs-row {
       max-width: 720px; margin: 0 auto;
@@ -115,7 +127,7 @@
     .cert img { width: 74px; height: 74px; object-fit: contain; display: block; }
 
     .cert-label {
-      font-family: 'DM Mono', monospace; font-size: 10px;
+      font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400;
       color: var(--muted); letter-spacing: 0.03em;
       text-align: center; line-height: 1.35;
     }
@@ -130,9 +142,14 @@
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
     .section-label {
-      font-family: 'DM Mono', monospace; font-size: 10px;
+      font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400;
       letter-spacing: 0.15em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.65rem;
+    }
+    .section-label::before {
+      content: ''; width: 16px; height: 1px;
+      background: var(--accent); flex: none;
     }
 
     /* ---- education ---- */
@@ -162,6 +179,11 @@
       width: 34px; height: 34px; border-radius: 7px;
       object-fit: contain; background: var(--surface);
       border: 1px solid var(--border); padding: 4px; margin-top: 1px;
+      transition: transform 0.3s var(--ease-out), border-color 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cv-item.exp:hover .cv-logo { transform: translateY(-2px); border-color: var(--accent); }
     }
 
     /* CVEs and publications */
@@ -227,6 +249,7 @@
 
     .tab-btn:hover { color: var(--text); }
     .tab-btn.active { color: var(--text); }
+    .tab-btn.active .count { color: var(--accent); opacity: 1; }
 
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
@@ -299,7 +322,7 @@
       justify-content: flex-end; align-content: flex-start; max-width: 230px;
     }
     .proj-tag {
-      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.02em;
+      font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.02em;
       color: var(--tag-text); background: var(--tag-bg);
       border-radius: 3px; padding: 3px 7px; white-space: nowrap; height: fit-content;
     }
@@ -344,6 +367,13 @@
       .tab-bar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
     }
 
+    /* sections rise as they come into view (class applied by JS, so no-JS still shows) */
+    .reveal { opacity: 0; transform: translateY(10px); }
+    .reveal.in {
+      opacity: 1; transform: none;
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+    }
+
     /* keep the fades, drop the movement */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -352,8 +382,11 @@
         animation: none;
       }
       .tab-indicator.ready { transition: none; }
+      .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
       a.cert:hover, a.cert:active,
       .chip:active, .tab-btn:active,
+      .nav-links a:hover::after,
+      .cv-item.exp:hover .cv-logo,
       .proj-item:hover .proj-main { transform: none; }
     }
   </style>
@@ -772,6 +805,21 @@
       }
     });
   });
+
+  // sections rise as they scroll into view, once each
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sections = document.querySelectorAll('.cv-section, .tabs-outer');
+  if (!reduced && 'IntersectionObserver' in window) {
+    sections.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0 });
+    sections.forEach(el => io.observe(el));
+  }
 
   // position before enabling the transition, so it doesn't sweep in on load
   moveIndicator();
