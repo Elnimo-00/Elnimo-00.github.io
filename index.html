@@ -109,9 +109,8 @@
     }
     .hero-links a:hover { color: var(--accent); border-color: var(--accent); }
 
+    .certs-block { max-width: var(--content); margin: 0 auto; padding: 0 2rem 5.5rem; }
     .certs-row {
-      max-width: var(--content); margin: 0 auto;
-      padding: 0 2rem 5.5rem;
       display: flex; gap: 2.2rem; flex-wrap: wrap; align-items: flex-start;
     }
 
@@ -140,24 +139,37 @@
     .hero p:nth-of-type(2) { animation: rise 0.6s var(--ease-out) 0.11s backwards; }
     .hero p:nth-of-type(3) { animation: rise 0.6s var(--ease-out) 0.16s backwards; }
     .hero-links     { animation: rise 0.6s var(--ease-out) 0.22s backwards; }
-    .certs-row      { animation: rise 0.6s var(--ease-out) 0.28s backwards; }
+
+    /* the badges land one after another rather than as a slab */
+    .certs-block .section-label { animation: rise 0.6s var(--ease-out) 0.28s backwards; }
+    .certs-row .cert { animation: rise 0.55s var(--ease-out) backwards; }
+    .certs-row .cert:nth-child(1) { animation-delay: 0.34s; }
+    .certs-row .cert:nth-child(2) { animation-delay: 0.39s; }
+    .certs-row .cert:nth-child(3) { animation-delay: 0.44s; }
+    .certs-row .cert:nth-child(4) { animation-delay: 0.49s; }
+    .certs-row .cert:nth-child(5) { animation-delay: 0.54s; }
 
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
     .section-label {
-      font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1.75rem;
-      display: flex; align-items: center; gap: 0.65rem;
+      font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.85rem;
     }
     .section-label::before {
-      content: ''; width: 16px; height: 1px;
+      content: ''; width: 26px; height: 1px;
       background: var(--accent); flex: none;
+      transform-origin: left center;
+      transition: transform 0.55s var(--ease-out) 0.12s;
     }
+    /* the rule draws itself as the section arrives */
+    .reveal .section-label::before { transform: scaleX(0); }
+    .reveal.in .section-label::before { transform: scaleX(1); }
 
     /* ---- education ---- */
 
-    .cv-grid { max-width: var(--content); margin: 0 auto; padding: 0 2rem; }
+    .cv-grid, .band { max-width: var(--content); margin: 0 auto; padding: 0 2rem; }
     .cv-section { padding-bottom: 4.5rem; }
 
     /* two panels once there is room: experience | education + cves + publications */
@@ -222,6 +234,9 @@
       transition: border-color 0.2s ease, color 0.2s ease, transform 0.16s var(--ease-out);
     }
     .chip:active { transform: scale(0.97); }
+    .reveal.in .chip { animation: rise 0.45s var(--ease-out) backwards; }
+    .reveal.in .chip:nth-child(1) { animation-delay: 0.06s; }
+    .reveal.in .chip:nth-child(2) { animation-delay: 0.12s; }
     .chip:hover { border-color: var(--accent); color: var(--accent); }
     .cv-note { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 60ch; }
 
@@ -355,12 +370,31 @@
 
     .two-col {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2.5rem; margin-bottom: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2.5rem 2rem; margin-bottom: 1rem;
     }
 
-    .skill-col ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .skill-col ul li { font-size: 14px; color: var(--text); font-weight: 300; }
+    .skill-col ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .skill-col ul li { font-size: 13.5px; color: var(--muted); font-weight: 300; }
+    .skill-head {
+      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 400;
+      letter-spacing: 0.07em; color: var(--text); margin-bottom: 0.85rem;
+    }
+    /* columns arrive left to right */
+    .reveal.in .skill-col { animation: rise 0.5s var(--ease-out) backwards; }
+    .reveal.in .skill-col:nth-child(1) { animation-delay: 0.06s; }
+    .reveal.in .skill-col:nth-child(2) { animation-delay: 0.12s; }
+    .reveal.in .skill-col:nth-child(3) { animation-delay: 0.18s; }
+    .reveal.in .skill-col:nth-child(4) { animation-delay: 0.24s; }
+    .reveal.in .skill-col:nth-child(5) { animation-delay: 0.30s; }
+
+    .contact-note { font-size: 14px; color: var(--muted); font-weight: 300; margin-bottom: 1.4rem; }
+    .contact-emails { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; }
+    /* plain text, not links; one click selects the whole address */
+    .contact-email {
+      font-family: 'DM Mono', monospace; font-size: 15px;
+      color: var(--text); user-select: all;
+    }
 
     footer {
       max-width: var(--content); margin: 0 auto;
@@ -375,7 +409,7 @@
 
     @media (max-width: 640px) {
       nav { padding: 1rem; }
-      .hero, .certs-row, .tabs-outer, .cv-grid { padding-left: 1rem; padding-right: 1rem; }
+      .hero, .certs-block, .tabs-outer, .cv-grid, .band { padding-left: 1rem; padding-right: 1rem; }
       .panel-header { flex-direction: column; }
       .panel-summary { text-align: left; max-width: none; }
       .cv-item { grid-template-columns: 1fr; }
@@ -403,10 +437,13 @@
     /* keep the fades, drop the movement */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .hero h1, .hero p, .hero-links, .certs-row,
+      .hero h1, .hero p, .hero-links,
+      .certs-block .section-label, .certs-row .cert,
+      .reveal.in .skill-col, .reveal.in .chip,
       .tab-panel.active .panel-header, .tab-panel.active .proj-item {
         animation: none;
       }
+      .section-label::before, .reveal .section-label::before { transform: none; transition: none; }
       .tab-indicator.ready { transition: none; }
       .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
       a.cert:hover, a.cert:active,
@@ -424,6 +461,7 @@
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#work">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a></li>
     <li><a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li>
   </ul>
@@ -437,40 +475,43 @@
   <div class="hero-links">
     <a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a>
     <a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
-    <a href="mailto:nthoma14@umd.edu">Email &#8599;</a>
+    <a href="#contact">Email</a>
   </div>
 </div>
 
-<div class="certs-row">
-  <a class="cert" href="https://credentials.offsec.com/2abd3784-1c12-49ec-8102-0b5d994129b2#acc.ruh2PTEH"
-     target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+), verify with OffSec">
-    <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
-    <span class="cert-label">OSCP+</span>
-  </a>
+<div class="certs-block">
+  <p class="section-label">Certifications</p>
+  <div class="certs-row">
+    <a class="cert" href="https://credentials.offsec.com/2abd3784-1c12-49ec-8102-0b5d994129b2#acc.ruh2PTEH"
+       target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+), verify with OffSec">
+      <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
+      <span class="cert-label">OSCP+</span>
+    </a>
 
-  <a class="cert" href="https://credentials.offsec.com/d73c3373-4e0c-4289-a8f8-cc684b368029#acc.bukZvz1o"
-     target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP), verify with OffSec">
-    <img src="assets/badges/oscp.png" alt="OffSec Certified Professional (OSCP)" />
-    <span class="cert-label">OSCP</span>
-  </a>
+    <a class="cert" href="https://credentials.offsec.com/d73c3373-4e0c-4289-a8f8-cc684b368029#acc.bukZvz1o"
+       target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP), verify with OffSec">
+      <img src="assets/badges/oscp.png" alt="OffSec Certified Professional (OSCP)" />
+      <span class="cert-label">OSCP</span>
+    </a>
 
-  <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
-     target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert, verify on Credly">
-    <img src="assets/badges/htb-coae.png" alt="HTB Certified Offensive AI Expert (HTB COAE)" />
-    <span class="cert-label">HTB COAE</span>
-  </a>
+    <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
+       target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert, verify on Credly">
+      <img src="assets/badges/htb-coae.png" alt="HTB Certified Offensive AI Expert (HTB COAE)" />
+      <span class="cert-label">HTB COAE</span>
+    </a>
 
-  <a class="cert" href="https://www.credly.com/badges/5f25846e-7da8-4df2-866c-069ec7f005a2"
-     target="_blank" rel="noopener" title="AWS Certified Solutions Architect, Associate, verify on Credly">
-    <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect, Associate" />
-    <span class="cert-label">AWS SAA</span>
-  </a>
+    <a class="cert" href="https://www.credly.com/badges/5f25846e-7da8-4df2-866c-069ec7f005a2"
+       target="_blank" rel="noopener" title="AWS Certified Solutions Architect, Associate, verify on Credly">
+      <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect, Associate" />
+      <span class="cert-label">AWS SAA</span>
+    </a>
 
-  <a class="cert" href="https://cp.certmetrics.com/CompTIA/en/public/verify/credential/BQFRF02QZEB4QWKK"
-     target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701), verify with CompTIA">
-    <img src="assets/badges/comptia-secplus.png" alt="CompTIA Security+ ce Certification" />
-    <span class="cert-label">Security+</span>
-  </a>
+    <a class="cert" href="https://cp.certmetrics.com/CompTIA/en/public/verify/credential/BQFRF02QZEB4QWKK"
+       target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701), verify with CompTIA">
+      <img src="assets/badges/comptia-secplus.png" alt="CompTIA Security+ ce Certification" />
+      <span class="cert-label">Security+</span>
+    </a>
+  </div>
 </div>
 
 <div class="cv-grid">
@@ -577,6 +618,54 @@
 
 
 
+
+<div class="band">
+  <section class="cv-section" id="toolkit">
+    <p class="section-label">Toolkit</p>
+    <div class="two-col">
+      <div class="skill-col">
+        <p class="skill-head">Offensive</p>
+        <ul>
+          <li>Active Directory attack paths</li>
+          <li>Web application testing</li>
+          <li>Binary exploitation, ROP</li>
+          <li>GDB, Frida</li>
+          <li>MITRE ATT&amp;CK</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <p class="skill-head">Cloud</p>
+        <ul>
+          <li>AWS IAM, VPC, KMS, S3</li>
+          <li>CloudFormation</li>
+          <li>EKS, Helm</li>
+          <li>CloudTrail forensics</li>
+          <li>NIST 800-53 mapping</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <p class="skill-head">DevSecOps</p>
+        <ul>
+          <li>GitHub Actions</li>
+          <li>Docker, Compose</li>
+          <li>SAST, SCA, secret scanning</li>
+          <li>Cosign, SBOM</li>
+          <li>OpenTelemetry, Grafana</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <p class="skill-head">ML &amp; AI</p>
+        <ul>
+          <li>PyTorch, scikit-learn</li>
+          <li>XGBoost, SHAP</li>
+          <li>MLflow, Airflow</li>
+          <li>Adversarial ML, DP-SGD</li>
+          <li>Python, C, Bash, SQL</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
 
 <div class="tabs-outer" id="work">
   <p class="section-label">Work</p>
@@ -794,6 +883,17 @@
     </div>
   </div>
 
+</div>
+
+<div class="band">
+  <section class="cv-section" id="contact">
+    <p class="section-label">Contact</p>
+    <p class="contact-note">The fastest way to reach me is email. Either address works.</p>
+    <div class="contact-emails">
+      <span class="contact-email">nimalkt@gmail.com</span>
+      <span class="contact-email">nthoma14@umd.edu</span>
+    </div>
+  </section>
 </div>
 
 <footer>
