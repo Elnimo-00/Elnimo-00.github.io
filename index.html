@@ -62,6 +62,13 @@
     }
     nav.scrolled { border-bottom-color: var(--border); }
 
+    /* hairline that tracks how far down the page you are */
+    .scroll-progress {
+      position: absolute; left: 0; bottom: -1px; width: 100%; height: 1.5px;
+      background: var(--accent); transform: scaleX(0);
+      transform-origin: left center; pointer-events: none;
+    }
+
     .logo {
       font-family: 'DM Mono', monospace;
       font-size: 13px; font-weight: 400;
@@ -83,6 +90,9 @@
       .nav-links a:hover { color: var(--text); }
       .nav-links a:hover::after { transform: scaleX(1); }
     }
+    /* the link for the section you are currently in stays marked */
+    .nav-links a.current { color: var(--text); }
+    .nav-links a.current::after { transform: scaleX(1); }
 
     .hero { max-width: var(--content); margin: 0 auto; padding: 9.5rem 2rem 4.5rem; }
 
@@ -134,7 +144,11 @@
     }
 
     /* first-load reveal, staggered down the hero */
-    .hero h1        { animation: rise 0.6s var(--ease-out) backwards; }
+    h1 { display: flex; flex-direction: column; }
+    .h1-line { display: block; overflow: hidden; padding-bottom: 0.12em; margin-bottom: -0.12em; }
+    .h1-line > * { display: inline-block; animation: maskUp 0.8s var(--ease-out) backwards; }
+    .h1-line:nth-child(2) > * { animation-delay: 0.09s; }
+    @keyframes maskUp { from { transform: translateY(105%); } to { transform: none; } }
     .hero p:nth-of-type(1) { animation: rise 0.6s var(--ease-out) 0.06s backwards; }
     .hero p:nth-of-type(2) { animation: rise 0.6s var(--ease-out) 0.11s backwards; }
     .hero p:nth-of-type(3) { animation: rise 0.6s var(--ease-out) 0.16s backwards; }
@@ -152,16 +166,20 @@
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
     .section-label {
-      font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--text); margin-bottom: 2rem;
-      display: flex; align-items: center; gap: 0.85rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.65rem, 3.2vw, 2.1rem);
+      font-weight: 300; letter-spacing: -0.028em; line-height: 1.1;
+      text-transform: none; color: var(--text);
+      margin-bottom: 2.25rem;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 0.95rem;
+      text-wrap: balance;
     }
+    /* the rule sits above the heading and draws itself in */
     .section-label::before {
-      content: ''; width: 26px; height: 1px;
+      content: ''; width: 34px; height: 2px;
       background: var(--accent); flex: none;
       transform-origin: left center;
-      transition: transform 0.55s var(--ease-out) 0.12s;
+      transition: transform 0.6s var(--ease-out) 0.1s;
     }
     /* the rule draws itself as the section arrives */
     .reveal .section-label::before { transform: scaleX(0); }
@@ -234,6 +252,14 @@
       transition: border-color 0.2s ease, color 0.2s ease, transform 0.16s var(--ease-out);
     }
     .chip:active { transform: scale(0.97); }
+    .reveal.in .cv-item,
+    .reveal.in .pub-item { animation: rise 0.5s var(--ease-out) backwards; }
+    .reveal.in .cv-item:nth-of-type(2),
+    .reveal.in .pub-item:nth-of-type(2) { animation-delay: 0.06s; }
+    .reveal.in .cv-item:nth-of-type(3) { animation-delay: 0.12s; }
+    .reveal.in .cv-item:nth-of-type(4) { animation-delay: 0.18s; }
+    .reveal.in .cv-item:nth-of-type(5) { animation-delay: 0.24s; }
+
     .reveal.in .chip { animation: rise 0.45s var(--ease-out) backwards; }
     .reveal.in .chip:nth-child(1) { animation-delay: 0.06s; }
     .reveal.in .chip:nth-child(2) { animation-delay: 0.12s; }
@@ -313,8 +339,7 @@
     }
 
     .panel-header h2 {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
-      font-weight: 300; letter-spacing: -0.02em;
+      font-size: 1.15rem; font-weight: 400; letter-spacing: -0.01em;
       text-wrap: balance;
     }
 
@@ -368,32 +393,16 @@
       border-radius: 3px; padding: 3px 7px; white-space: nowrap; height: fit-content;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2.5rem 2rem; margin-bottom: 1rem;
-    }
-
-    .skill-col ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .skill-col ul li { font-size: 13.5px; color: var(--muted); font-weight: 300; }
-    .skill-head {
-      font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 400;
-      letter-spacing: 0.07em; color: var(--text); margin-bottom: 0.85rem;
-    }
-    /* columns arrive left to right */
-    .reveal.in .skill-col { animation: rise 0.5s var(--ease-out) backwards; }
-    .reveal.in .skill-col:nth-child(1) { animation-delay: 0.06s; }
-    .reveal.in .skill-col:nth-child(2) { animation-delay: 0.12s; }
-    .reveal.in .skill-col:nth-child(3) { animation-delay: 0.18s; }
-    .reveal.in .skill-col:nth-child(4) { animation-delay: 0.24s; }
-    .reveal.in .skill-col:nth-child(5) { animation-delay: 0.30s; }
-
     .contact-note { font-size: 14px; color: var(--muted); font-weight: 300; margin-bottom: 1.4rem; }
     .contact-emails { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; }
     /* plain text, not links; one click selects the whole address */
     .contact-email {
       font-family: 'DM Mono', monospace; font-size: 15px;
       color: var(--text); user-select: all;
+      transition: color 0.2s ease;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .contact-email:hover { color: var(--accent); }
     }
 
     footer {
@@ -437,12 +446,13 @@
     /* keep the fades, drop the movement */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .hero h1, .hero p, .hero-links,
+      .h1-line > *, .hero p, .hero-links,
       .certs-block .section-label, .certs-row .cert,
-      .reveal.in .skill-col, .reveal.in .chip,
+      .reveal.in .chip, .reveal.in .cv-item, .reveal.in .pub-item,
       .tab-panel.active .panel-header, .tab-panel.active .proj-item {
         animation: none;
       }
+      .scroll-progress { display: none; }
       .section-label::before, .reveal .section-label::before { transform: none; transition: none; }
       .tab-indicator.ready { transition: none; }
       .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
@@ -465,10 +475,14 @@
     <li><a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a></li>
     <li><a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li>
   </ul>
+  <span class="scroll-progress" aria-hidden="true"></span>
 </nav>
 
 <div class="hero">
-  <h1>Nimal Kurien Thomas<br><em>security &amp; engineering</em></h1>
+  <h1>
+    <span class="h1-line"><span>Nimal Kurien Thomas</span></span>
+    <span class="h1-line"><em>security &amp; engineering</em></span>
+  </h1>
   <p>Security and software engineer working across offensive security, cloud and cloud security, DevOps and DevSecOps, backend engineering, and AI and AI security. I build systems, then test how they fail.</p>
   <p>Two CVEs, two IEEE papers, and an MEng in Cybersecurity at the University of Maryland.</p>
   <p>Based in College Park, Maryland.</p>
@@ -618,54 +632,6 @@
 
 
 
-
-<div class="band">
-  <section class="cv-section" id="toolkit">
-    <p class="section-label">Toolkit</p>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="skill-head">Offensive</p>
-        <ul>
-          <li>Active Directory attack paths</li>
-          <li>Web application testing</li>
-          <li>Binary exploitation, ROP</li>
-          <li>GDB, Frida</li>
-          <li>MITRE ATT&amp;CK</li>
-        </ul>
-      </div>
-      <div class="skill-col">
-        <p class="skill-head">Cloud</p>
-        <ul>
-          <li>AWS IAM, VPC, KMS, S3</li>
-          <li>CloudFormation</li>
-          <li>EKS, Helm</li>
-          <li>CloudTrail forensics</li>
-          <li>NIST 800-53 mapping</li>
-        </ul>
-      </div>
-      <div class="skill-col">
-        <p class="skill-head">DevSecOps</p>
-        <ul>
-          <li>GitHub Actions</li>
-          <li>Docker, Compose</li>
-          <li>SAST, SCA, secret scanning</li>
-          <li>Cosign, SBOM</li>
-          <li>OpenTelemetry, Grafana</li>
-        </ul>
-      </div>
-      <div class="skill-col">
-        <p class="skill-head">ML &amp; AI</p>
-        <ul>
-          <li>PyTorch, scikit-learn</li>
-          <li>XGBoost, SHAP</li>
-          <li>MLflow, Airflow</li>
-          <li>Adversarial ML, DP-SGD</li>
-          <li>Python, C, Bash, SQL</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</div>
 
 <div class="tabs-outer" id="work">
   <p class="section-label">Work</p>
@@ -940,6 +906,32 @@
       }
     });
   });
+
+  // hairline tracking scroll depth
+  const progress = document.querySelector('.scroll-progress');
+  function syncProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    progress.style.transform = 'scaleX(' + p + ')';
+  }
+  syncProgress();
+  window.addEventListener('scroll', syncProgress, { passive: true });
+  window.addEventListener('resize', syncProgress);
+
+  // mark the nav link for whichever section you are currently in
+  const marks = [...document.querySelectorAll('.nav-links a[href^="#"]')]
+    .map(a => ({ link: a, target: document.querySelector(a.getAttribute('href')) }))
+    .filter(m => m.target);
+
+  function syncCurrent() {
+    let active = null;
+    for (const m of marks) {
+      if (m.target.getBoundingClientRect().top <= 140) active = m;
+    }
+    marks.forEach(m => m.link.classList.toggle('current', m === active));
+  }
+  syncCurrent();
+  window.addEventListener('scroll', syncCurrent, { passive: true });
 
   // sections rise as they scroll into view, once each
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
