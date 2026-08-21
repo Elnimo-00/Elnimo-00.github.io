@@ -126,6 +126,36 @@
       color: var(--muted); white-space: nowrap; padding-top: 2px;
     }
 
+    /* experience rows carry a small company logo */
+    .cv-item.exp { grid-template-columns: 40px 1fr auto; align-items: start; }
+    .cv-logo {
+      width: 34px; height: 34px; border-radius: 7px;
+      object-fit: contain; background: var(--surface);
+      border: 1px solid var(--border); padding: 4px; margin-top: 1px;
+    }
+
+    /* CVEs and publications */
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 0.9rem; }
+    .chip {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      color: var(--text); text-decoration: none;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 5px 11px; transition: border-color 0.2s, color 0.2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+    .cv-note { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 60ch; }
+
+    .pub-item {
+      padding: 1.25rem 0; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .pub-item:last-child { border-bottom: 1px solid var(--border); }
+    .pub-title { font-size: 14px; font-weight: 400; }
+    .pub-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+    .pub-meta a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .pub-meta a:hover { color: var(--accent); border-color: var(--accent); }
+    .pub-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 62ch; }
+
     /* ---- project tabs ---- */
 
     .tabs-outer { max-width: 960px; margin: 0 auto; padding: 0 2rem 6rem; }
@@ -238,6 +268,8 @@
       .panel-header { flex-direction: column; }
       .panel-summary { text-align: left; max-width: none; }
       .cv-item { grid-template-columns: 1fr; }
+      .cv-item.exp { grid-template-columns: 34px 1fr; column-gap: 0.8rem; }
+      .cv-item.exp .cv-date { grid-column: 1 / -1; padding-top: 0; }
       .cv-date { padding-top: 0; }
       .proj-item { grid-template-columns: 1fr; gap: 0.7rem; }
       .proj-tags { justify-content: flex-start; max-width: none; }
@@ -256,7 +288,8 @@
 <nav>
   <a href="#" class="logo">NKT</a>
   <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#work">Projects</a></li>
     <li><a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a></li>
     <li><a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li>
   </ul>
@@ -269,6 +302,7 @@
   <div class="hero-links">
     <a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a>
     <a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+    <a href="mailto:nthoma14@umd.edu">Email &#8599;</a>
   </div>
 </div>
 
@@ -310,27 +344,96 @@
     <div class="cv-main">
       <span class="cv-role">Master of Engineering, Cybersecurity</span>
       <span class="cv-org">University of Maryland, College Park</span>
-      <p class="cv-desc">Graduate coursework across cloud security, binary exploitation, offensive security, and applied machine learning.</p>
+      <p class="cv-desc">GPA 3.8 / 4.0. Coursework across cloud security, binary exploitation, offensive security, and applied machine learning.</p>
     </div>
-    <span class="cv-date"></span>
+    <span class="cv-date">Expected Dec 2026</span>
+  </div>
+  <div class="cv-item">
+    <div class="cv-main">
+      <span class="cv-role">Bachelor of Engineering, Computer Science</span>
+      <span class="cv-org">New Horizon College of Engineering, Bengaluru</span>
+      <p class="cv-desc">GPA 8.8 / 10.</p>
+    </div>
+    <span class="cv-date">2018 - 2022</span>
   </div>
 </section>
 
-<!--
-  EXPERIENCE, add your roles here when ready. Copy this block per entry:
+<section class="cv-section" id="experience">
+  <p class="section-label">Experience</p>
 
-  <section class="cv-section" id="experience">
-    <p class="section-label">Experience</p>
-    <div class="cv-item">
-      <div class="cv-main">
-        <span class="cv-role">Role title</span>
-        <span class="cv-org">Organisation</span>
-        <p class="cv-desc">A line or two on scope and what you were responsible for.</p>
-      </div>
-      <span class="cv-date">Jun 2025, Aug 2025</span>
+  <div class="cv-item exp">
+    <img class="cv-logo" src="assets/logos/umd.png" alt="University of Maryland logo" loading="lazy" />
+    <div class="cv-main">
+      <span class="cv-role">Teaching Assistant</span>
+      <span class="cv-org">University of Maryland, College Park</span>
+      <p class="cv-desc">Supported a graduate cybersecurity course: office hours, grading assignments and exams, and technical guidance on coursework and lab exercises.</p>
     </div>
-  </section>
--->
+    <span class="cv-date">Jan 2026 - May 2026</span>
+  </div>
+
+  <div class="cv-item exp">
+    <img class="cv-logo" src="assets/logos/brightsight.png" alt="Brightsight by SGS logo" loading="lazy" />
+    <div class="cv-main">
+      <span class="cv-role">Security Evaluation Intern</span>
+      <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
+      <p class="cv-desc">Built a proof-of-concept for side-channel analysis on Android, collecting motion-sensor data in the background and hooking the target with Frida, then ran MLflow A/B experiments across models to find the best classifier. Performed static and dynamic analysis on mobile payment apps against MPoC requirements.</p>
+    </div>
+    <span class="cv-date">Aug 2025 - Dec 2025</span>
+  </div>
+
+  <div class="cv-item exp">
+    <img class="cv-logo" src="assets/logos/capgemini.png" alt="Capgemini logo" loading="lazy" />
+    <div class="cv-main">
+      <span class="cv-role">Software Engineer, Project Management Officer (Fortive account)</span>
+      <span class="cv-org">Capgemini, Bengaluru</span>
+      <p class="cv-desc">Drove Agile delivery across Azure-based workstreams and managed Supply Chain domain deliveries. Oversaw CI/CD tooling and L1/L2 support workflows with onshore and offshore teams, plus effort tracking and billing.</p>
+    </div>
+    <span class="cv-date">Apr 2023 - Jul 2024</span>
+  </div>
+
+  <div class="cv-item exp">
+    <img class="cv-logo" src="assets/logos/tcs.svg" alt="Tata Consultancy Services logo" loading="lazy" />
+    <div class="cv-main">
+      <span class="cv-role">Industry Training Program, Rapid Labs</span>
+      <span class="cv-org">Tata Consultancy Services, Bengaluru</span>
+      <p class="cv-desc">Helped build a VADER-based sentiment analysis module, handling data cleaning with Apache Spark and tuning the classifier on curated datasets to improve reliability.</p>
+    </div>
+    <span class="cv-date">Apr 2022 - Jun 2022</span>
+  </div>
+
+  <div class="cv-item exp">
+    <img class="cv-logo" src="assets/logos/capitalquant.svg" alt="Capital Quant Solutions logo" loading="lazy" />
+    <div class="cv-main">
+      <span class="cv-role">Software Engineering Intern</span>
+      <span class="cv-org">Capital Quant Solutions, Bengaluru</span>
+      <p class="cv-desc">Developed and tested REST API endpoints for internal tools, and built a proof-of-concept to integrate a static code analyzer into the pipeline for early detection of quality and security issues.</p>
+    </div>
+    <span class="cv-date">Feb 2021 - Apr 2021</span>
+  </div>
+</section>
+
+<section class="cv-section" id="cves">
+  <p class="section-label">CVEs</p>
+  <div class="chip-row">
+    <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
+    <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42352" target="_blank" rel="noopener">CVE-2026-42352 &#8599;</a>
+  </div>
+  <p class="cv-note">Identified and responsibly disclosed two security vulnerabilities, each assigned a CVE identifier.</p>
+</section>
+
+<section class="cv-section" id="publications">
+  <p class="section-label">Publications</p>
+  <div class="pub-item">
+    <span class="pub-title">Skin Lesion Classification using CNN</span>
+    <span class="pub-meta">IEEE &middot; <a href="https://doi.org/10.1109/ICICT54344.2022.9850506" target="_blank" rel="noopener">DOI 10.1109/ICICT54344.2022.9850506 &#8599;</a></span>
+    <p class="pub-desc">A CNN-based web application reaching 90% accuracy on the ISIC dataset for melanoma, nevus, and seborrheic keratosis classification.</p>
+  </div>
+  <div class="pub-item">
+    <span class="pub-title">Skin Cancer Detection using Deep Learning</span>
+    <span class="pub-meta">IEEE &middot; <a href="https://doi.org/10.1109/ICEARS53579.2022.9751826" target="_blank" rel="noopener">DOI 10.1109/ICEARS53579.2022.9751826 &#8599;</a></span>
+    <p class="pub-desc">A CNN model reaching 88% accuracy classifying skin lesions from the ISIC dataset.</p>
+  </div>
+</section>
 
 <div class="tabs-outer" id="work">
   <p class="section-label">Work</p>
