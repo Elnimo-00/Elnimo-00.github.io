@@ -19,6 +19,9 @@
       --tag-bg: #eeeee9;
       --tag-text: #4a4a47;
       --accent: #b4552d;
+
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     }
 
     html { scroll-behavior: smooth; }
@@ -31,6 +34,17 @@
       line-height: 1.7;
       font-weight: 300;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: rgba(180, 85, 45, 0.13); }
+
+    :focus-visible {
+      outline: 1.5px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
     }
 
     nav {
@@ -40,9 +54,11 @@
       background: rgba(249,248,245,0.9);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.35s ease;
       z-index: 200;
     }
+    nav.scrolled { border-bottom-color: var(--border); }
 
     .logo {
       font-family: 'DM Mono', monospace;
@@ -60,13 +76,14 @@
       font-size: clamp(2rem, 5vw, 2.8rem);
       font-weight: 300; line-height: 1.15;
       letter-spacing: -0.025em; margin-bottom: 1.25rem;
+      text-wrap: balance;
     }
 
     h1 em {
       font-style: italic; font-family: 'DM Mono', monospace; font-size: 0.88em;
     }
 
-    .hero p { color: var(--muted); font-weight: 300; max-width: 54ch; margin-bottom: 0.75rem; }
+    .hero p { color: var(--muted); font-weight: 300; max-width: 54ch; margin-bottom: 0.75rem; text-wrap: pretty; }
 
     .hero-links { display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; }
 
@@ -87,9 +104,13 @@
     .cert {
       display: flex; flex-direction: column; align-items: center; gap: 9px;
       width: 92px; text-decoration: none; color: inherit;
-      transition: opacity 0.2s;
+      transition: transform 0.28s var(--ease-out), opacity 0.2s ease;
     }
-    a.cert:hover { opacity: 0.62; }
+    a.cert:active { transform: translateY(-2px) scale(0.98); }
+
+    @media (hover: hover) and (pointer: fine) {
+      a.cert:hover { transform: translateY(-3px); opacity: 0.78; }
+    }
 
     .cert img { width: 74px; height: 74px; object-fit: contain; display: block; }
 
@@ -98,6 +119,15 @@
       color: var(--muted); letter-spacing: 0.03em;
       text-align: center; line-height: 1.35;
     }
+
+    /* first-load reveal, staggered down the hero */
+    .hero h1        { animation: rise 0.6s var(--ease-out) backwards; }
+    .hero p:nth-of-type(1) { animation: rise 0.6s var(--ease-out) 0.06s backwards; }
+    .hero p:nth-of-type(2) { animation: rise 0.6s var(--ease-out) 0.11s backwards; }
+    .hero-links     { animation: rise 0.6s var(--ease-out) 0.17s backwards; }
+    .certs-row      { animation: rise 0.6s var(--ease-out) 0.23s backwards; }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
     .section-label {
       font-family: 'DM Mono', monospace; font-size: 10px;
@@ -119,7 +149,7 @@
     .cv-main { display: flex; flex-direction: column; gap: 3px; }
     .cv-role { font-size: 14px; font-weight: 400; }
     .cv-org { font-size: 13px; color: var(--muted); }
-    .cv-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 52ch; margin-top: 4px; }
+    .cv-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 52ch; margin-top: 4px; text-wrap: pretty; }
 
     .cv-date {
       font-family: 'DM Mono', monospace; font-size: 11px;
@@ -140,8 +170,10 @@
       font-family: 'DM Mono', monospace; font-size: 12px;
       color: var(--text); text-decoration: none;
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 4px; padding: 5px 11px; transition: border-color 0.2s, color 0.2s;
+      border-radius: 4px; padding: 5px 11px;
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.16s var(--ease-out);
     }
+    .chip:active { transform: scale(0.97); }
     .chip:hover { border-color: var(--accent); color: var(--accent); }
     .cv-note { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 60ch; }
 
@@ -154,19 +186,30 @@
     .pub-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
     .pub-meta a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
     .pub-meta a:hover { color: var(--accent); border-color: var(--accent); }
-    .pub-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 62ch; }
+    .pub-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 62ch; text-wrap: pretty; }
 
     /* ---- project tabs ---- */
 
     .tabs-outer { max-width: 960px; margin: 0 auto; padding: 0 2rem 6rem; }
 
     .tab-bar {
+      position: relative;
       display: flex; gap: 0;
       border-bottom: 1px solid var(--border);
       margin-bottom: 2.5rem;
       overflow-x: auto; scrollbar-width: none;
     }
     .tab-bar::-webkit-scrollbar { display: none; }
+
+    /* the underline glides between tabs instead of cutting */
+    .tab-indicator {
+      position: absolute; bottom: 0; left: 0;
+      width: 1px; height: 2px;
+      background: var(--text);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+    .tab-indicator.ready { transition: transform 0.38s var(--ease-in-out); }
 
     .tab-btn {
       font-family: 'DM Mono', monospace; font-size: 12px;
@@ -176,17 +219,29 @@
       color: var(--muted);
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
-      transition: color 0.2s, border-color 0.2s;
+      transition: color 0.2s ease, transform 0.16s var(--ease-out);
       white-space: nowrap;
     }
+    .tab-btn:active { transform: scale(0.97); }
     .tab-btn .count { font-size: 10px; opacity: 0.6; margin-left: 5px; }
 
     .tab-btn:hover { color: var(--text); }
-    .tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+    .tab-btn.active { color: var(--text); }
 
     .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: fade 0.35s ease; }
-    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .tab-panel.active { display: block; }
+
+    /* rows cascade in rather than landing all at once */
+    .tab-panel.active .panel-header { animation: rise 0.42s var(--ease-out) backwards; }
+    .tab-panel.active .proj-item { animation: rise 0.42s var(--ease-out) backwards; }
+    .tab-panel.active .proj-item:nth-child(1) { animation-delay: 0.03s; }
+    .tab-panel.active .proj-item:nth-child(2) { animation-delay: 0.07s; }
+    .tab-panel.active .proj-item:nth-child(3) { animation-delay: 0.11s; }
+    .tab-panel.active .proj-item:nth-child(4) { animation-delay: 0.15s; }
+    .tab-panel.active .proj-item:nth-child(5) { animation-delay: 0.19s; }
+    .tab-panel.active .proj-item:nth-child(6) { animation-delay: 0.23s; }
+    .tab-panel.active .proj-item:nth-child(7) { animation-delay: 0.27s; }
+    .tab-panel.active .proj-item:nth-child(8) { animation-delay: 0.31s; }
 
     .panel-header {
       display: flex; justify-content: space-between;
@@ -196,11 +251,12 @@
     .panel-header h2 {
       font-size: clamp(1.3rem, 3vw, 1.8rem);
       font-weight: 300; letter-spacing: -0.02em;
+      text-wrap: balance;
     }
 
     .panel-summary {
       font-size: 14px; color: var(--muted);
-      max-width: 40ch; font-weight: 300; text-align: right;
+      max-width: 40ch; font-weight: 300; text-align: right; text-wrap: pretty;
     }
 
     /* ---- project rows ---- */
@@ -212,14 +268,20 @@
       padding: 1.35rem 0;
       border-top: 1px solid var(--border);
       text-decoration: none; color: inherit;
-      transition: padding-left 0.22s ease;
     }
     .proj-item:last-child { border-bottom: 1px solid var(--border); }
-    .proj-item:hover { padding-left: 0.55rem; }
-    .proj-item:hover .proj-name { color: var(--accent); }
-    .proj-item:hover .proj-arrow { opacity: 1; transform: none; }
+    .proj-item:active .proj-name { color: var(--accent); }
 
-    .proj-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .proj-main {
+      display: flex; flex-direction: column; gap: 6px; min-width: 0;
+      transition: transform 0.28s var(--ease-out);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .proj-item:hover .proj-main { transform: translateX(0.5rem); }
+      .proj-item:hover .proj-name { color: var(--accent); }
+      .proj-item:hover .proj-arrow { opacity: 1; transform: none; }
+    }
     .proj-name {
       font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
       letter-spacing: 0.01em; display: flex; align-items: center; gap: 8px;
@@ -230,7 +292,7 @@
       transition: opacity 0.22s, transform 0.22s;
       font-size: 12px; color: var(--accent);
     }
-    .proj-desc { font-size: 13.5px; color: var(--muted); font-weight: 300; max-width: 60ch; }
+    .proj-desc { font-size: 13.5px; color: var(--muted); font-weight: 300; max-width: 60ch; text-wrap: pretty; }
 
     .proj-tags {
       display: flex; gap: 6px; flex-wrap: wrap;
@@ -280,6 +342,19 @@
       .tab-bar::-webkit-scrollbar { display: block; height: 3px; }
       .tab-bar::-webkit-scrollbar-track { background: transparent; }
       .tab-bar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    }
+
+    /* keep the fades, drop the movement */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .hero h1, .hero p, .hero-links, .certs-row,
+      .tab-panel.active .panel-header, .tab-panel.active .proj-item {
+        animation: none;
+      }
+      .tab-indicator.ready { transition: none; }
+      a.cert:hover, a.cert:active,
+      .chip:active, .tab-btn:active,
+      .proj-item:hover .proj-main { transform: none; }
     }
   </style>
 </head>
@@ -445,6 +520,7 @@
     <button class="tab-btn" data-tab="binexp">Binary Exploitation<span class="count">1</span></button>
     <button class="tab-btn" data-tab="dfir">DFIR<span class="count">1</span></button>
     <button class="tab-btn" data-tab="api">API &amp; AI Security<span class="count">1</span></button>
+    <span class="tab-indicator" aria-hidden="true"></span>
   </div>
 
   <!-- CLOUD -->
@@ -660,18 +736,48 @@
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
+  // nav hairline only once the page has actually moved
+  const navEl = document.querySelector('nav');
+  const syncNav = () => navEl.classList.toggle('scrolled', window.scrollY > 8);
+  syncNav();
+  window.addEventListener('scroll', syncNav, { passive: true });
+
   const btns = document.querySelectorAll('.tab-btn');
   const panels = document.querySelectorAll('.tab-panel');
+  const bar = document.querySelector('.tab-bar');
+  const indicator = document.querySelector('.tab-indicator');
+
+  function moveIndicator() {
+    const active = document.querySelector('.tab-btn.active');
+    if (!active) return;
+    indicator.style.transform =
+      'translateX(' + active.offsetLeft + 'px) scaleX(' + active.offsetWidth + ')';
+  }
 
   btns.forEach(btn => {
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+
     btn.addEventListener('click', () => {
-      btns.forEach(b => b.classList.remove('active'));
+      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
       panels.forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-      window.scrollTo({ top: document.querySelector('.tabs-outer').offsetTop - 80, behavior: 'smooth' });
+      moveIndicator();
+
+      // only pull the page up if the tabs have slipped under the nav
+      if (bar.getBoundingClientRect().top < 72) {
+        window.scrollTo({ top: document.querySelector('.tabs-outer').offsetTop - 80, behavior: 'smooth' });
+      }
     });
   });
+
+  // position before enabling the transition, so it doesn't sweep in on load
+  moveIndicator();
+  requestAnimationFrame(() => requestAnimationFrame(() => indicator.classList.add('ready')));
+  window.addEventListener('resize', moveIndicator);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveIndicator);
 </script>
 
 </body>
