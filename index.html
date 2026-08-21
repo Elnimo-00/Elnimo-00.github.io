@@ -82,7 +82,7 @@
       .nav-links a:hover::after { transform: scaleX(1); }
     }
 
-    .hero { max-width: 720px; margin: 0 auto; padding: 9rem 2rem 3.5rem; }
+    .hero { max-width: 960px; margin: 0 auto; padding: 9rem 2rem 3.5rem; }
 
     h1 {
       font-size: clamp(2rem, 5vw, 2.8rem);
@@ -108,7 +108,7 @@
     .hero-links a:hover { color: var(--accent); border-color: var(--accent); }
 
     .certs-row {
-      max-width: 720px; margin: 0 auto;
+      max-width: 960px; margin: 0 auto;
       padding: 0 2rem 4rem;
       display: flex; gap: 1.6rem; flex-wrap: wrap; align-items: flex-start;
     }
@@ -154,7 +154,30 @@
 
     /* ---- education ---- */
 
-    .cv-section { max-width: 720px; margin: 0 auto; padding: 0 2rem 3.5rem; }
+    .cv-grid { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+    .cv-section { padding-bottom: 3.5rem; }
+
+    /* two panels once there is room: experience | education + cves + publications */
+    @media (min-width: 1000px) {
+      .cv-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        column-gap: 3.5rem;
+        align-items: start;
+      }
+
+      /* the date leads the block instead of taking a right-hand column */
+      .cv-item { grid-template-columns: 1fr; row-gap: 4px; }
+      .cv-item > .cv-date { grid-column: 1; grid-row: 1; padding-top: 0; }
+      .cv-item > .cv-main { grid-column: 1; grid-row: 2; }
+
+      .cv-item.exp { grid-template-columns: 40px 1fr; }
+      .cv-item.exp > .cv-logo { grid-column: 1; grid-row: 1 / span 2; margin-top: 2px; }
+      .cv-item.exp > .cv-date { grid-column: 2; grid-row: 1; }
+      .cv-item.exp > .cv-main { grid-column: 2; grid-row: 2; }
+
+      .cv-desc { max-width: 58ch; }
+    }
 
     .cv-item {
       display: grid; grid-template-columns: 1fr auto; gap: 1rem;
@@ -337,7 +360,7 @@
     .skill-col ul li { font-size: 14px; color: var(--text); font-weight: 300; }
 
     footer {
-      max-width: 720px; margin: 0 auto;
+      max-width: 960px; margin: 0 auto;
       padding: 2rem 2rem 4rem;
       border-top: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
@@ -349,7 +372,7 @@
 
     @media (max-width: 640px) {
       nav { padding: 1rem; }
-      .hero, .certs-row, .tabs-outer, .cv-section { padding-left: 1rem; padding-right: 1rem; }
+      .hero, .certs-row, .tabs-outer, .cv-grid { padding-left: 1rem; padding-right: 1rem; }
       .panel-header { flex-direction: column; }
       .panel-summary { text-align: left; max-width: none; }
       .cv-item { grid-template-columns: 1fr; }
@@ -446,102 +469,110 @@
   </a>
 </div>
 
-<section class="cv-section" id="education">
-  <p class="section-label">Education</p>
-  <div class="cv-item">
-    <div class="cv-main">
-      <span class="cv-role">Master of Engineering, Cybersecurity</span>
-      <span class="cv-org">University of Maryland, College Park</span>
-      <p class="cv-desc">GPA 3.8 / 4.0. Coursework across cloud security, binary exploitation, offensive security, and applied machine learning.</p>
-    </div>
-    <span class="cv-date">Expected Dec 2026</span>
-  </div>
-  <div class="cv-item">
-    <div class="cv-main">
-      <span class="cv-role">Bachelor of Engineering, Computer Science</span>
-      <span class="cv-org">Visvesvaraya Technological University, Bengaluru</span>
-      <p class="cv-desc">GPA 8.8 / 10.</p>
-    </div>
-    <span class="cv-date">2018 - 2022</span>
-  </div>
-</section>
+<div class="cv-grid">
+  <div class="cv-col">
+    <section class="cv-section" id="experience">
+      <p class="section-label">Experience</p>
 
-<section class="cv-section" id="experience">
-  <p class="section-label">Experience</p>
+      <div class="cv-item exp">
+        <img class="cv-logo" src="assets/logos/brightsight.png" alt="Brightsight by SGS logo" loading="lazy" />
+        <div class="cv-main">
+          <span class="cv-role">Security Evaluation Intern</span>
+          <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
+          <p class="cv-desc">Built a proof-of-concept for side-channel analysis on Android, collecting motion-sensor data in the background and hooking the target with Frida, then ran MLflow A/B experiments across models to find the best classifier. Performed static and dynamic analysis on mobile payment apps against MPoC requirements.</p>
+        </div>
+        <span class="cv-date">Aug 2025 - Dec 2025</span>
+      </div>
 
-  <div class="cv-item exp">
-    <img class="cv-logo" src="assets/logos/brightsight.png" alt="Brightsight by SGS logo" loading="lazy" />
-    <div class="cv-main">
-      <span class="cv-role">Security Evaluation Intern</span>
-      <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
-      <p class="cv-desc">Built a proof-of-concept for side-channel analysis on Android, collecting motion-sensor data in the background and hooking the target with Frida, then ran MLflow A/B experiments across models to find the best classifier. Performed static and dynamic analysis on mobile payment apps against MPoC requirements.</p>
-    </div>
-    <span class="cv-date">Aug 2025 - Dec 2025</span>
-  </div>
+      <div class="cv-item exp">
+        <img class="cv-logo" src="assets/logos/umd.png" alt="University of Maryland logo" loading="lazy" />
+        <div class="cv-main">
+          <span class="cv-role">Teaching Assistant</span>
+          <span class="cv-org">University of Maryland, College Park</span>
+          <p class="cv-desc">Supported a graduate course: office hours, grading assignments and exams, and technical guidance on coursework and lab exercises.</p>
+        </div>
+        <span class="cv-date">Jan 2026 - Present</span>
+      </div>
 
-  <div class="cv-item exp">
-    <img class="cv-logo" src="assets/logos/umd.png" alt="University of Maryland logo" loading="lazy" />
-    <div class="cv-main">
-      <span class="cv-role">Teaching Assistant</span>
-      <span class="cv-org">University of Maryland, College Park</span>
-      <p class="cv-desc">Supported a graduate course: office hours, grading assignments and exams, and technical guidance on coursework and lab exercises.</p>
-    </div>
-    <span class="cv-date">Jan 2026 - Present</span>
-  </div>
+      <div class="cv-item exp">
+        <img class="cv-logo" src="assets/logos/capgemini.png" alt="Capgemini logo" loading="lazy" />
+        <div class="cv-main">
+          <span class="cv-role">Software Engineer, Project Management Officer (Fortive account)</span>
+          <span class="cv-org">Capgemini, Bengaluru</span>
+          <p class="cv-desc">Drove Agile delivery across Azure-based workstreams and managed Supply Chain domain deliveries. Oversaw CI/CD tooling and L1/L2 support workflows with onshore and offshore teams, plus effort tracking and billing.</p>
+        </div>
+        <span class="cv-date">Apr 2023 - Jul 2024</span>
+      </div>
 
-  <div class="cv-item exp">
-    <img class="cv-logo" src="assets/logos/capgemini.png" alt="Capgemini logo" loading="lazy" />
-    <div class="cv-main">
-      <span class="cv-role">Software Engineer, Project Management Officer (Fortive account)</span>
-      <span class="cv-org">Capgemini, Bengaluru</span>
-      <p class="cv-desc">Drove Agile delivery across Azure-based workstreams and managed Supply Chain domain deliveries. Oversaw CI/CD tooling and L1/L2 support workflows with onshore and offshore teams, plus effort tracking and billing.</p>
-    </div>
-    <span class="cv-date">Apr 2023 - Jul 2024</span>
-  </div>
+      <div class="cv-item exp">
+        <img class="cv-logo" src="assets/logos/tcs.svg" alt="Tata Consultancy Services logo" loading="lazy" />
+        <div class="cv-main">
+          <span class="cv-role">Industry Training Program, Rapid Labs</span>
+          <span class="cv-org">Tata Consultancy Services, Bengaluru</span>
+          <p class="cv-desc">Helped build a VADER-based sentiment analysis module, handling data cleaning with Apache Spark and tuning the classifier on curated datasets to improve reliability.</p>
+        </div>
+        <span class="cv-date">Apr 2022 - Jun 2022</span>
+      </div>
 
-  <div class="cv-item exp">
-    <img class="cv-logo" src="assets/logos/tcs.svg" alt="Tata Consultancy Services logo" loading="lazy" />
-    <div class="cv-main">
-      <span class="cv-role">Industry Training Program, Rapid Labs</span>
-      <span class="cv-org">Tata Consultancy Services, Bengaluru</span>
-      <p class="cv-desc">Helped build a VADER-based sentiment analysis module, handling data cleaning with Apache Spark and tuning the classifier on curated datasets to improve reliability.</p>
-    </div>
-    <span class="cv-date">Apr 2022 - Jun 2022</span>
+      <div class="cv-item exp">
+        <img class="cv-logo" src="assets/logos/capitalquant.svg" alt="Capital Quant Solutions logo" loading="lazy" />
+        <div class="cv-main">
+          <span class="cv-role">Software Engineering Intern</span>
+          <span class="cv-org">Capital Quant Solutions, Bengaluru</span>
+          <p class="cv-desc">Developed and tested REST API endpoints for internal tools, and built a proof-of-concept to integrate a static code analyzer into the pipeline for early detection of quality and security issues.</p>
+        </div>
+        <span class="cv-date">Feb 2021 - Apr 2021</span>
+      </div>
+    </section>
   </div>
+  <div class="cv-col">
+    <section class="cv-section" id="education">
+      <p class="section-label">Education</p>
+      <div class="cv-item">
+        <div class="cv-main">
+          <span class="cv-role">Master of Engineering, Cybersecurity</span>
+          <span class="cv-org">University of Maryland, College Park</span>
+          <p class="cv-desc">GPA 3.8 / 4.0. Coursework across cloud security, binary exploitation, offensive security, and applied machine learning.</p>
+        </div>
+        <span class="cv-date">Expected Dec 2026</span>
+      </div>
+      <div class="cv-item">
+        <div class="cv-main">
+          <span class="cv-role">Bachelor of Engineering, Computer Science</span>
+          <span class="cv-org">Visvesvaraya Technological University, Bengaluru</span>
+          <p class="cv-desc">GPA 8.8 / 10.</p>
+        </div>
+        <span class="cv-date">2018 - 2022</span>
+      </div>
+    </section>
 
-  <div class="cv-item exp">
-    <img class="cv-logo" src="assets/logos/capitalquant.svg" alt="Capital Quant Solutions logo" loading="lazy" />
-    <div class="cv-main">
-      <span class="cv-role">Software Engineering Intern</span>
-      <span class="cv-org">Capital Quant Solutions, Bengaluru</span>
-      <p class="cv-desc">Developed and tested REST API endpoints for internal tools, and built a proof-of-concept to integrate a static code analyzer into the pipeline for early detection of quality and security issues.</p>
-    </div>
-    <span class="cv-date">Feb 2021 - Apr 2021</span>
-  </div>
-</section>
+    <section class="cv-section" id="cves">
+      <p class="section-label">CVEs</p>
+      <div class="chip-row">
+        <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
+        <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42352" target="_blank" rel="noopener">CVE-2026-42352 &#8599;</a>
+      </div>
+      <p class="cv-note">Identified and responsibly disclosed two security vulnerabilities, each assigned a CVE identifier.</p>
+    </section>
 
-<section class="cv-section" id="cves">
-  <p class="section-label">CVEs</p>
-  <div class="chip-row">
-    <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
-    <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42352" target="_blank" rel="noopener">CVE-2026-42352 &#8599;</a>
+    <section class="cv-section" id="publications">
+      <p class="section-label">Publications</p>
+      <div class="pub-item">
+        <span class="pub-title">Skin Lesion Classification using CNN</span>
+        <span class="pub-meta">IEEE &middot; <a href="https://doi.org/10.1109/ICICT54344.2022.9850506" target="_blank" rel="noopener">DOI 10.1109/ICICT54344.2022.9850506 &#8599;</a></span>
+        <p class="pub-desc">A CNN-based web application reaching 90% accuracy on the ISIC dataset for melanoma, nevus, and seborrheic keratosis classification.</p>
+      </div>
+      <div class="pub-item">
+        <span class="pub-title">Skin Cancer Detection using Deep Learning</span>
+        <span class="pub-meta">IEEE &middot; <a href="https://doi.org/10.1109/ICEARS53579.2022.9751826" target="_blank" rel="noopener">DOI 10.1109/ICEARS53579.2022.9751826 &#8599;</a></span>
+        <p class="pub-desc">A CNN model reaching 88% accuracy classifying skin lesions from the ISIC dataset.</p>
+      </div>
+    </section>
   </div>
-  <p class="cv-note">Identified and responsibly disclosed two security vulnerabilities, each assigned a CVE identifier.</p>
-</section>
+</div>
 
-<section class="cv-section" id="publications">
-  <p class="section-label">Publications</p>
-  <div class="pub-item">
-    <span class="pub-title">Skin Lesion Classification using CNN</span>
-    <span class="pub-meta">IEEE &middot; <a href="https://doi.org/10.1109/ICICT54344.2022.9850506" target="_blank" rel="noopener">DOI 10.1109/ICICT54344.2022.9850506 &#8599;</a></span>
-    <p class="pub-desc">A CNN-based web application reaching 90% accuracy on the ISIC dataset for melanoma, nevus, and seborrheic keratosis classification.</p>
-  </div>
-  <div class="pub-item">
-    <span class="pub-title">Skin Cancer Detection using Deep Learning</span>
-    <span class="pub-meta">IEEE &middot; <a href="https://doi.org/10.1109/ICEARS53579.2022.9751826" target="_blank" rel="noopener">DOI 10.1109/ICEARS53579.2022.9751826 &#8599;</a></span>
-    <p class="pub-desc">A CNN model reaching 88% accuracy classifying skin lesions from the ISIC dataset.</p>
-  </div>
-</section>
+
+
 
 <div class="tabs-outer" id="work">
   <p class="section-label">Work</p>
