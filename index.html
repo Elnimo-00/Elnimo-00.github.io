@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nimal Kurien Thomas — Security & Engineering</title>
+  <title>Nimal Kurien Thomas, Security &amp; Engineering</title>
+  <meta name="description" content="Nimal Kurien Thomas, security and engineering. Cloud security, pentesting, binary exploitation, DevSecOps, and applied machine learning projects." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -17,6 +18,7 @@
       --border: #e2e1dc;
       --tag-bg: #eeeee9;
       --tag-text: #4a4a47;
+      --accent: #b4552d;
     }
 
     html { scroll-behavior: smooth; }
@@ -103,7 +105,7 @@
       color: var(--muted); margin-bottom: 1.25rem;
     }
 
-    /* ---- experience / education ---- */
+    /* ---- education ---- */
 
     .cv-section { max-width: 720px; margin: 0 auto; padding: 0 2rem 3.5rem; }
 
@@ -122,17 +124,6 @@
     .cv-date {
       font-family: 'DM Mono', monospace; font-size: 11px;
       color: var(--muted); white-space: nowrap; padding-top: 2px;
-    }
-
-    /* placeholder rows — replace the contents and delete this class */
-    .tbd { opacity: 0.5; }
-    .tbd .cv-role::after {
-      content: 'placeholder';
-      font-family: 'DM Mono', monospace; font-size: 9px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      border: 1px solid var(--border); border-radius: 2px;
-      padding: 1px 5px; margin-left: 8px; color: var(--muted);
-      vertical-align: middle;
     }
 
     /* ---- project tabs ---- */
@@ -158,16 +149,18 @@
       transition: color 0.2s, border-color 0.2s;
       white-space: nowrap;
     }
+    .tab-btn .count { font-size: 10px; opacity: 0.6; margin-left: 5px; }
 
     .tab-btn:hover { color: var(--text); }
     .tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
 
     .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+    .tab-panel.active { display: block; animation: fade 0.35s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
     .panel-header {
       display: flex; justify-content: space-between;
-      align-items: flex-start; margin-bottom: 2.5rem; gap: 2rem;
+      align-items: flex-start; margin-bottom: 2rem; gap: 2rem;
     }
 
     .panel-header h2 {
@@ -180,19 +173,49 @@
       max-width: 40ch; font-weight: 300; text-align: right;
     }
 
-    .proj-list { margin-bottom: 3rem; }
+    /* ---- project rows ---- */
 
-    /* empty state until real projects go in */
-    .proj-empty {
-      border: 1px dashed var(--border); border-radius: 4px;
-      padding: 1.5rem; margin-bottom: 3rem;
-      font-size: 13px; color: var(--muted); font-weight: 300;
+    .proj-list { display: flex; flex-direction: column; margin-bottom: 3rem; }
+
+    .proj-item {
+      display: grid; grid-template-columns: 1fr auto; gap: 1.4rem;
+      padding: 1.35rem 0;
+      border-top: 1px solid var(--border);
+      text-decoration: none; color: inherit;
+      transition: padding-left 0.22s ease;
+    }
+    .proj-item:last-child { border-bottom: 1px solid var(--border); }
+    .proj-item:hover { padding-left: 0.55rem; }
+    .proj-item:hover .proj-name { color: var(--accent); }
+    .proj-item:hover .proj-arrow { opacity: 1; transform: none; }
+
+    .proj-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .proj-name {
+      font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 400;
+      letter-spacing: 0.01em; display: flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .proj-arrow {
+      opacity: 0; transform: translateX(-4px);
+      transition: opacity 0.22s, transform 0.22s;
+      font-size: 12px; color: var(--accent);
+    }
+    .proj-desc { font-size: 13.5px; color: var(--muted); font-weight: 300; max-width: 60ch; }
+
+    .proj-tags {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      justify-content: flex-end; align-content: flex-start; max-width: 230px;
+    }
+    .proj-tag {
+      font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.02em;
+      color: var(--tag-text); background: var(--tag-bg);
+      border-radius: 3px; padding: 3px 7px; white-space: nowrap; height: fit-content;
     }
 
     .two-col {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2.5rem; margin-bottom: 3rem;
+      gap: 2.5rem; margin-bottom: 1rem;
     }
 
     .skill-col ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
@@ -206,6 +229,8 @@
     }
 
     footer span { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+    footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); }
+    footer a:hover { color: var(--text); }
 
     @media (max-width: 640px) {
       nav { padding: 1rem; }
@@ -214,10 +239,10 @@
       .panel-summary { text-align: left; max-width: none; }
       .cv-item { grid-template-columns: 1fr; }
       .cv-date { padding-top: 0; }
+      .proj-item { grid-template-columns: 1fr; gap: 0.7rem; }
+      .proj-tags { justify-content: flex-start; max-width: none; }
     }
 
-    /* below ~900px the 7 tabs no longer fit — show a thin scrollbar so the
-       overflowing tabs are discoverable instead of silently clipped */
     @media (max-width: 900px) {
       .tab-bar { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
       .tab-bar::-webkit-scrollbar { display: block; height: 3px; }
@@ -231,178 +256,129 @@
 <nav>
   <a href="#" class="logo">NKT</a>
   <ul class="nav-links">
-    <li><a href="#experience">Experience</a></li>
     <li><a href="#work">Work</a></li>
-    <li><a href="resume.pdf" target="_blank">Résumé ↗</a></li>
+    <li><a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a></li>
+    <li><a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a></li>
   </ul>
 </nav>
 
 <div class="hero">
   <h1>Nimal Kurien Thomas<br><em>security &amp; engineering</em></h1>
-  <p>I work across the stack — securing infrastructure, hunting threats, breaking applications, and building intelligent systems.</p>
+  <p>I work across the stack, securing infrastructure, hunting threats, breaking applications, and building intelligent systems.</p>
   <p>Based in College Park, MD. Open to relocation and remote.</p>
   <div class="hero-links">
-    <a href="https://github.com/Elnimo-00" target="_blank">GitHub ↗</a>
-    <a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank">LinkedIn ↗</a>
-    <a href="resume.pdf" target="_blank">Résumé ↗</a>
+    <a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a>
+    <a href="https://www.linkedin.com/in/nimal-kurien-thomas/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
   </div>
 </div>
 
 <div class="certs-row">
   <a class="cert" href="https://credentials.offsec.com/2abd3784-1c12-49ec-8102-0b5d994129b2#acc.ruh2PTEH"
-     target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+) — verify with OffSec">
+     target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+), verify with OffSec">
     <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
     <span class="cert-label">OSCP+</span>
   </a>
 
   <a class="cert" href="https://credentials.offsec.com/d73c3373-4e0c-4289-a8f8-cc684b368029#acc.bukZvz1o"
-     target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP) — verify with OffSec">
+     target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP), verify with OffSec">
     <img src="assets/badges/oscp.png" alt="OffSec Certified Professional (OSCP)" />
     <span class="cert-label">OSCP</span>
   </a>
 
   <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
-     target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert — issued Aug 2026, verify on Credly">
+     target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert, verify on Credly">
     <img src="assets/badges/htb-coae.png" alt="HTB Certified Offensive AI Expert (HTB COAE)" />
     <span class="cert-label">HTB COAE</span>
   </a>
 
   <a class="cert" href="https://www.credly.com/badges/5f25846e-7da8-4df2-866c-069ec7f005a2"
-     target="_blank" rel="noopener" title="AWS Certified Solutions Architect – Associate — issued Apr 2025, valid to Apr 2028, verify on Credly">
-    <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect – Associate" />
+     target="_blank" rel="noopener" title="AWS Certified Solutions Architect, Associate, verify on Credly">
+    <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect, Associate" />
     <span class="cert-label">AWS SAA</span>
   </a>
 
   <a class="cert" href="https://cp.certmetrics.com/CompTIA/en/public/verify/credential/BQFRF02QZEB4QWKK"
-     target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701) — active to Mar 2028, verify with CompTIA">
+     target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701), verify with CompTIA">
     <img src="assets/badges/comptia-secplus.png" alt="CompTIA Security+ ce Certification" />
     <span class="cert-label">Security+</span>
   </a>
 </div>
 
-<!--
-  EXPERIENCE — replace the placeholder row(s) below. Copy this block per entry
-  and delete class="tbd" once the contents are real:
-
-  <div class="cv-item">
-    <div class="cv-main">
-      <span class="cv-role">Security Engineer Intern</span>
-      <span class="cv-org">Company Name</span>
-      <p class="cv-desc">One or two lines on what you actually did.</p>
-    </div>
-    <span class="cv-date">Jun 2025 — Aug 2025</span>
-  </div>
--->
-<section class="cv-section" id="experience">
-  <p class="section-label">Experience</p>
-  <div class="cv-item tbd">
-    <div class="cv-main">
-      <span class="cv-role">Role title</span>
-      <span class="cv-org">Organisation</span>
-      <p class="cv-desc">A line or two on scope and what you were responsible for.</p>
-    </div>
-    <span class="cv-date">—</span>
-  </div>
-  <div class="cv-item tbd">
-    <div class="cv-main">
-      <span class="cv-role">Role title</span>
-      <span class="cv-org">Organisation</span>
-      <p class="cv-desc">A line or two on scope and what you were responsible for.</p>
-    </div>
-    <span class="cv-date">—</span>
-  </div>
-</section>
-
-<!-- EDUCATION — same structure as above. -->
 <section class="cv-section" id="education">
   <p class="section-label">Education</p>
-  <div class="cv-item tbd">
+  <div class="cv-item">
     <div class="cv-main">
-      <span class="cv-role">Degree</span>
-      <span class="cv-org">University</span>
-      <p class="cv-desc">Focus area, thesis, or relevant coursework.</p>
+      <span class="cv-role">Master of Engineering, Cybersecurity</span>
+      <span class="cv-org">University of Maryland, College Park</span>
+      <p class="cv-desc">Graduate coursework across cloud security, binary exploitation, offensive security, and applied machine learning.</p>
     </div>
-    <span class="cv-date">—</span>
-  </div>
-  <div class="cv-item tbd">
-    <div class="cv-main">
-      <span class="cv-role">Degree</span>
-      <span class="cv-org">University</span>
-      <p class="cv-desc">Focus area, thesis, or relevant coursework.</p>
-    </div>
-    <span class="cv-date">—</span>
+    <span class="cv-date"></span>
   </div>
 </section>
+
+<!--
+  EXPERIENCE, add your roles here when ready. Copy this block per entry:
+
+  <section class="cv-section" id="experience">
+    <p class="section-label">Experience</p>
+    <div class="cv-item">
+      <div class="cv-main">
+        <span class="cv-role">Role title</span>
+        <span class="cv-org">Organisation</span>
+        <p class="cv-desc">A line or two on scope and what you were responsible for.</p>
+      </div>
+      <span class="cv-date">Jun 2025, Aug 2025</span>
+    </div>
+  </section>
+-->
 
 <div class="tabs-outer" id="work">
   <p class="section-label">Work</p>
   <div class="tab-bar" role="tablist">
-    <button class="tab-btn active" data-tab="cloud">Cloud &amp; Cloud Security</button>
-    <button class="tab-btn" data-tab="devsecops">DevOps / DevSecOps</button>
-    <button class="tab-btn" data-tab="pentest">Pentesting</button>
-    <button class="tab-btn" data-tab="mlai">ML / AI</button>
-    <button class="tab-btn" data-tab="api">API</button>
-    <button class="tab-btn" data-tab="binexp">Binary Exploitation</button>
-    <button class="tab-btn" data-tab="dfir">DFIR</button>
+    <button class="tab-btn active" data-tab="cloud">Cloud &amp; Cloud Security<span class="count">4</span></button>
+    <button class="tab-btn" data-tab="mlai">ML / AI<span class="count">8</span></button>
+    <button class="tab-btn" data-tab="pentest">Pentesting<span class="count">2</span></button>
+    <button class="tab-btn" data-tab="devsecops">DevOps / DevSecOps<span class="count">2</span></button>
+    <button class="tab-btn" data-tab="binexp">Binary Exploitation<span class="count">1</span></button>
+    <button class="tab-btn" data-tab="dfir">DFIR<span class="count">1</span></button>
+    <button class="tab-btn" data-tab="api">API &amp; AI Security<span class="count">1</span></button>
   </div>
 
   <!-- CLOUD -->
   <div class="tab-panel active" id="tab-cloud">
     <div class="panel-header">
       <h2>Cloud &amp; Cloud Security</h2>
-      <p class="panel-summary">Securing cloud-native environments — IAM, posture management, and runtime defence.</p>
+      <p class="panel-summary">Building and breaking AWS environments, from reference architectures to misconfiguration chains.</p>
     </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Platforms</p>
-        <ul><li>AWS (primary)</li><li>GCP</li><li>Kubernetes / EKS</li><li>Terraform / Pulumi</li><li>Cloudflare</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Focus</p>
-        <ul><li>IAM &amp; least-privilege</li><li>CSPM &amp; posture management</li><li>Cloud workload protection</li><li>Serverless security</li><li>CIS benchmarks / SOC2</li></ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- DEVOPS / DEVSECOPS -->
-  <div class="tab-panel" id="tab-devsecops">
-    <div class="panel-header">
-      <h2>DevOps / DevSecOps</h2>
-      <p class="panel-summary">Shifting security left — baking it into pipelines, containers, and delivery workflows.</p>
-    </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Tools</p>
-        <ul><li>Semgrep / SonarQube</li><li>Trivy / Grype</li><li>Checkov / Terrascan</li><li>Falco</li><li>Vault (HashiCorp)</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Practices</p>
-        <ul><li>Threat modeling</li><li>Supply chain security (SLSA)</li><li>Policy-as-code (OPA)</li><li>SBOM generation</li><li>Secure IaC (Terraform)</li></ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- PENTESTING -->
-  <div class="tab-panel" id="tab-pentest">
-    <div class="panel-header">
-      <h2>Pentesting</h2>
-      <p class="panel-summary">Offensive security — finding the holes before the adversary does.</p>
-    </div>
-    <p class="section-label">Projects &amp; write-ups</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Tools</p>
-        <ul><li>Burp Suite</li><li>Metasploit</li><li>Nmap / Masscan</li><li>BloodHound / SharpHound</li><li>Impacket</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Domains</p>
-        <ul><li>Web app pentesting</li><li>Active Directory attacks</li><li>Network enumeration</li><li>Privilege escalation</li><li>Report writing</li></ul>
-      </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/scalable-secure-ecommerce-aws" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Scalable &amp; Secure E-Commerce on AWS <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A three-tier e-commerce platform as deployable CloudFormation: CloudFront and WAF at the edge, an ALB over a multi-AZ auto scaling group, and KMS-encrypted RDS.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">AWS</span><span class="proj-tag">CloudFormation</span><span class="proj-tag">IaC</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/cloud-security-audit" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Cloud Security Audit <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">An AWS security assessment of OWASP Juice Shop: 23 findings across IAM, network, data, patching and logging, each mapped to NIST 800-53 with a fix.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">AWS</span><span class="proj-tag">Assessment</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/cloud-hardening-plan" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Cloud Hardening Plan <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">Hardening an OWASP Juice Shop deployment on AWS: private subnets behind an ALB, bastion access, scoped IAM, and VPC flow logs, written as CloudFormation.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">AWS</span><span class="proj-tag">CloudFormation</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/cloud-infra-pentest" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Cloud Infra Pentest <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A walkthrough of all six levels of flaws.cloud: S3, EBS, IMDS and IAM misconfigurations, and how they chain into a full account compromise.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">AWS</span><span class="proj-tag">Offensive</span></div>
+      </a>
     </div>
   </div>
 
@@ -410,39 +386,113 @@
   <div class="tab-panel" id="tab-mlai">
     <div class="panel-header">
       <h2>ML / AI</h2>
-      <p class="panel-summary">Applying machine learning to security problems and building intelligent systems.</p>
+      <p class="panel-summary">Machine learning aimed at security problems, from malware to privacy to side channels.</p>
     </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Stack</p>
-        <ul><li>Python / PyTorch / scikit-learn</li><li>HuggingFace Transformers</li><li>LangChain / LlamaIndex</li><li>FastAPI</li><li>MLflow</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Focus areas</p>
-        <ul><li>Security-focused ML</li><li>LLM red-teaming</li><li>Anomaly &amp; intrusion detection</li><li>NLP for threat intel</li><li>Adversarial ML</li></ul>
-      </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/Differential-Privacy-ML" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Differential Privacy ML (DP-SGD) <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">Training neural nets that provably forget: DP-SGD on CIFAR-10, with a membership-inference attack to measure the privacy versus utility tradeoff.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Privacy</span><span class="proj-tag">PyTorch</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/MLPro" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">MLPro, Malicious Package Detector <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">An ML-powered detector for malicious npm and PyPI packages: XGBoost with SHAP explanations, orchestrated with Airflow and MLflow.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Supply Chain</span><span class="proj-tag">XGBoost</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/malware-classifier" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Malware Classifier <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A ResNet50 image classifier on the MalImg dataset, sorting malware binary visualizations into 25 families.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Deep Learning</span><span class="proj-tag">Malware</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/ai-evasion-notebooks" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">AI Evasion Notebooks <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">Adversarial evasion against image classifiers: crafting FGSM-style perturbations that flip a model's prediction while staying imperceptible.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Adversarial ML</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/network-anomaly-detection" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Network Anomaly Detection <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">Multi-class network intrusion detection with a Random Forest on the NSL-KDD dataset.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">IDS</span><span class="proj-tag">scikit-learn</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/Pin-sensor-side-channel-leak" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">PIN Side-Channel Leak <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A web tool that trains ML models to infer a phone PIN from motion-sensor side-channel data.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Side-Channel</span><span class="proj-tag">Research</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/Pin-sensor-prediction-webapp" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">PIN Sensor Prediction Webapp <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A web app for training and deploying models that predict PIN entry from accelerometer and gyroscope readings.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Side-Channel</span><span class="proj-tag">Web</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/sms-spam-detection" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">SMS Spam Detection <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A Naive Bayes classifier on the UCI SMS Spam Collection, sorting messages into spam or ham.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">NLP</span><span class="proj-tag">Naive Bayes</span></div>
+      </a>
     </div>
   </div>
 
-  <!-- API -->
-  <div class="tab-panel" id="tab-api">
+  <!-- PENTESTING -->
+  <div class="tab-panel" id="tab-pentest">
     <div class="panel-header">
-      <h2>API Security</h2>
-      <p class="panel-summary">Designing, securing, and stress-testing APIs — from spec to production.</p>
+      <h2>Pentesting</h2>
+      <p class="panel-summary">Full-chain offensive engagements, written up from initial access to objective.</p>
     </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Tools &amp; specs</p>
-        <ul><li>Burp Suite (API testing)</li><li>Postman / Insomnia</li><li>OpenAPI / Swagger</li><li>GraphQL</li><li>gRPC / Protobuf</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Areas</p>
-        <ul><li>OWASP API Top 10</li><li>Auth patterns (OAuth2, JWT)</li><li>Rate limiting &amp; abuse prevention</li><li>API fuzzing &amp; testing</li><li>REST &amp; async API design</li></ul>
-      </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/masked-dj-pentest" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Masked DJ Pentest <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">An internal pentest that chained five hosts from EternalBlue to an AWS S3 exfil. Seven findings mapped to MITRE ATT&amp;CK, plus the controls that held.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Pentest</span><span class="proj-tag">Active Directory</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/grade-server-ctf" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Grade Server CTF <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A black-box web CTF: SQL injection, IDOR and default-credential command execution on a vulnerable grade server, then an SSH host takeover.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Web</span><span class="proj-tag">CTF</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DEVOPS / DEVSECOPS -->
+  <div class="tab-panel" id="tab-devsecops">
+    <div class="panel-header">
+      <h2>DevOps / DevSecOps</h2>
+      <p class="panel-summary">Security baked into pipelines and platforms, from scanning gates to signed artifacts.</p>
+    </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/secure-pipeline-demo" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Secure Pipeline Demo <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A small Flask API wrapped in a shift-left pipeline: SAST, dependency, secret and container scanning on every push, plus a signed image with a verifiable SBOM.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">DevSecOps</span><span class="proj-tag">CI/CD</span><span class="proj-tag">Cosign</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/otel-eks-observability" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">OpenTelemetry on EKS <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">The OpenTelemetry demo on Amazon EKS: Helm, Prometheus and Grafana alerting, and a GitHub Actions pipeline to ECR with rollback on failure.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">EKS</span><span class="proj-tag">Helm</span><span class="proj-tag">CI/CD</span></div>
+      </a>
     </div>
   </div>
 
@@ -450,19 +500,16 @@
   <div class="tab-panel" id="tab-binexp">
     <div class="panel-header">
       <h2>Binary Exploitation</h2>
-      <p class="panel-summary">Memory corruption, reverse engineering, and turning crashes into control.</p>
+      <p class="panel-summary">Memory corruption from the ground up, and turning crashes into control.</p>
     </div>
-    <p class="section-label">Projects &amp; write-ups</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Tools</p>
-        <ul><li>GDB / pwndbg</li><li>pwntools</li><li>Ghidra / IDA</li><li>radare2</li><li>AFL++ / libFuzzer</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Areas</p>
-        <ul><li>Stack &amp; heap overflows</li><li>Return-oriented programming</li><li>Format string bugs</li><li>ASLR / NX / canary bypass</li><li>Shellcode development</li></ul>
-      </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/binary-exploitation" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Binary Exploitation (ENPM691) <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">Twelve assignments running from C memory fundamentals through stack smashing, format strings, the GOT, heap use-after-free, and return-oriented programming.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">pwn</span><span class="proj-tag">GDB</span><span class="proj-tag">ROP</span></div>
+      </a>
     </div>
   </div>
 
@@ -470,19 +517,33 @@
   <div class="tab-panel" id="tab-dfir">
     <div class="panel-header">
       <h2>DFIR</h2>
-      <p class="panel-summary">Digital forensics and incident response — finding what happened, how, and when.</p>
+      <p class="panel-summary">Reconstructing what happened, how, and when, from the logs left behind.</p>
     </div>
-    <p class="section-label">Projects</p>
-    <div class="proj-empty">Projects for this area are on the way.</div>
-    <div class="two-col">
-      <div class="skill-col">
-        <p class="section-label">Tools</p>
-        <ul><li>Autopsy / FTK</li><li>Volatility 3</li><li>Velociraptor</li><li>Elastic / Splunk</li><li>Wireshark / Zeek</li></ul>
-      </div>
-      <div class="skill-col">
-        <p class="section-label">Areas</p>
-        <ul><li>Windows forensics (MFT, registry)</li><li>Memory analysis</li><li>Malware triage</li><li>Network traffic analysis</li><li>Chain of custody</li></ul>
-      </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/cloud-incident-response" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Cloud Incident Response <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A CloudTrail forensic investigation of a simulated AWS breach: AssumeRole privilege escalation and S3 exfiltration, reconstructed with a reusable jq toolkit.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">DFIR</span><span class="proj-tag">CloudTrail</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- API & AI SECURITY -->
+  <div class="tab-panel" id="tab-api">
+    <div class="panel-header">
+      <h2>API &amp; AI Security</h2>
+      <p class="panel-summary">Securing the interfaces AI systems expose, and the protocols they speak.</p>
+    </div>
+    <div class="proj-list">
+      <a class="proj-item" href="https://github.com/Elnimo-00/MCP-Security" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">MCP Security Lab <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">A hands-on lab of Model Context Protocol server vulnerabilities and malicious-server techniques, with mitigations, from the HTB Attacking AI curriculum.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">MCP</span><span class="proj-tag">AI Security</span></div>
+      </a>
     </div>
   </div>
 
@@ -490,7 +551,7 @@
 
 <footer>
   <span>Nimal Kurien Thomas</span>
-  <span id="yr"></span>
+  <span><a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">github.com/Elnimo-00</a> &middot; <span id="yr"></span></span>
 </footer>
 
 <script>
