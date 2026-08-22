@@ -381,6 +381,7 @@
       font-size: 14px; color: var(--muted);
       max-width: 40ch; font-weight: 300; text-align: right; text-wrap: pretty;
     }
+    .panel-note { font-size: 12.5px; color: var(--muted); font-weight: 300; font-style: italic; margin-top: 1.6rem; }
 
     /* ---- project rows ---- */
 
@@ -577,8 +578,7 @@
             <li>Injected a Frida gadget into the live app process to timestamp every tap and collected motion traces in the background through a buffered <span class="mono">SensorEventListener</span> service, labelling the sensor window just before and after each press to build precisely aligned per-digit datasets.</li>
             <li>Benchmarked logistic regression, decision tree, random forest, and SVM in MLflow, with random forest performing best at ~70% per digit on per-device models, and shipped the capture, training, and inference workflow as a Flask tool.</li>
             <li>Ran static and dynamic analysis on mobile payment applications, mapping findings to MPoC software protection requirements.</li>
-            <li>Analyzed a published Samsung Galaxy A boot chain compromise, four chained CVEs running from a Little Kernel JPEG heap overflow to arbitrary physical-to-virtual mapping, for a full secure boot bypass with TEE key extraction.</li>
-            <li>Studied and attempted to reproduce a public iOS sandbox escape abusing the <span class="mono">itunesstored</span> and <span class="mono">bookassetd</span> daemons to write files into restricted <span class="mono">/private/var</span> paths.</li>
+            <li>Explored secure boot and mobile sandboxing outside evaluation work: attempted to reproduce a public iOS sandbox escape abusing the <span class="mono">itunesstored</span> and <span class="mono">bookassetd</span> daemons to write files into restricted <span class="mono">/private/var</span> paths, and traced a published Samsung Galaxy A boot chain running from a Little Kernel JPEG heap overflow to a full secure boot bypass with TEE key extraction.</li>
           </ul>
         </div>
         <span class="cv-date">Aug 2025 - Dec 2025</span>
@@ -632,7 +632,7 @@
           <span class="cv-org">Capital Quant Solutions, Bengaluru</span>
           <ul class="cv-bullets">
             <li>Wrote Python scripts to parse PDFs and extract and analyze data from financial reports.</li>
-            <li>Automated a manual document-processing workflow for the team.</li>
+            <li>Automated a manual document-processing workflow.</li>
           </ul>
         </div>
         <span class="cv-date">Feb 2021 - Apr 2021</span>
@@ -843,6 +843,7 @@
         <div class="proj-tags"><span class="proj-tag">Web</span><span class="proj-tag">CTF</span></div>
       </a>
     </div>
+    <p class="panel-note">Further engagement reports are not published here.</p>
   </div>
 
   <!-- DEVOPS / DEVSECOPS -->
