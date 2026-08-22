@@ -538,7 +538,8 @@
         <div class="cv-main">
           <span class="cv-role">Security Evaluation Intern</span>
           <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
-          <p class="cv-desc">Built a proof-of-concept for side-channel analysis on Android, collecting motion-sensor data in the background and hooking the target with Frida, then ran MLflow A/B experiments across models to find the best classifier. Performed static and dynamic analysis on mobile payment apps against MPoC requirements.</p>
+          <p class="cv-desc">Built an end-to-end motion side-channel attack recovering a mobile banking PIN from the phone’s own haptic feedback: each keypress vibration perturbs the accelerometer and gyroscope, sensors readable without any app-granted permission. Injected a Frida gadget into the live app process to timestamp every tap, labelling the sensor window just before and after each press, then benchmarked logistic regression, decision tree, random forest, and SVM in MLflow — random forest best at ~70% per digit on per-device models.</p>
+          <p class="cv-desc">Shipped the capture, training, and inference workflow as a Flask tool used internally by the evaluation team. Also ran static and dynamic analysis on mobile payment apps, mapping findings to MPoC software protection requirements.</p>
         </div>
         <span class="cv-date">Aug 2025 - Dec 2025</span>
       </div>
@@ -548,7 +549,7 @@
         <div class="cv-main">
           <span class="cv-role">Teaching Assistant</span>
           <span class="cv-org">University of Maryland, College Park</span>
-          <p class="cv-desc">Supported a graduate course: office hours, grading assignments and exams, and technical guidance on coursework and lab exercises.</p>
+          <p class="cv-desc">Supported students through office hours, guidance on coursework, and grading of assignments and exams.</p>
         </div>
         <span class="cv-date">Jan 2026 - Present</span>
       </div>
@@ -556,9 +557,10 @@
       <div class="cv-item exp">
         <img class="cv-logo" src="assets/logos/capgemini.png" alt="Capgemini logo" loading="lazy" />
         <div class="cv-main">
-          <span class="cv-role">Software Engineer, Project Management Officer (Fortive account)</span>
+          <span class="cv-role">Software Engineer, Project Management Office (Fortive account)</span>
           <span class="cv-org">Capgemini, Bengaluru</span>
-          <p class="cv-desc">Drove Agile delivery across Azure-based workstreams and managed Supply Chain domain deliveries. Oversaw CI/CD tooling and L1/L2 support workflows with onshore and offshore teams, plus effort tracking and billing.</p>
+          <p class="cv-desc">Drove Agile/Scrum delivery for a global industrial client across Azure-based workstreams, facilitating sprint planning, standups, and retrospectives and tracking releases and dependencies to keep program management, engineering, and offshore teams aligned. Owned Supply Chain domain releases, and managed L1/L2 escalation workflows, driving triage of production issues between support and engineering through to resolution.</p>
+          <p class="cv-desc">Supported a client audit by coordinating and compiling required documentation and evidence across teams to meet auditor deadlines.</p>
         </div>
         <span class="cv-date">Apr 2023 - Jul 2024</span>
       </div>
@@ -568,7 +570,7 @@
         <div class="cv-main">
           <span class="cv-role">Industry Training Program, Rapid Labs</span>
           <span class="cv-org">Tata Consultancy Services, Bengaluru</span>
-          <p class="cv-desc">Helped build a VADER-based sentiment analysis module, handling data cleaning with Apache Spark and tuning the classifier on curated datasets to improve reliability.</p>
+          <p class="cv-desc">Built a VADER-based sentiment analysis module in an NLP pipeline — tokenization, stop-word removal, stemming, then lexicon scoring — using Apache Spark for data cleaning and tuning the classifier against curated datasets to improve reliability.</p>
         </div>
         <span class="cv-date">Apr 2022 - Jun 2022</span>
       </div>
@@ -578,7 +580,7 @@
         <div class="cv-main">
           <span class="cv-role">Software Engineering Intern</span>
           <span class="cv-org">Capital Quant Solutions, Bengaluru</span>
-          <p class="cv-desc">Developed and tested REST API endpoints for internal tools, and built a proof-of-concept to integrate a static code analyzer into the pipeline for early detection of quality and security issues.</p>
+          <p class="cv-desc">Wrote Python scripts to parse PDFs and extract and analyze data from financial reports, automating a manual document-processing workflow for the team.</p>
         </div>
         <span class="cv-date">Feb 2021 - Apr 2021</span>
       </div>
