@@ -240,6 +240,13 @@
       width: 7px; height: 1px; background: var(--accent); opacity: 0.6;
     }
 
+    .course-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+    .course-tag {
+      font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 400; letter-spacing: 0.02em;
+      color: var(--tag-text); background: var(--tag-bg);
+      border-radius: 3px; padding: 4px 8px;
+    }
+
     .cv-date {
       font-family: 'DM Mono', monospace; font-size: 11px;
       color: var(--muted); white-space: nowrap; padding-top: 2px;
@@ -567,13 +574,11 @@
           <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
           <ul class="cv-bullets">
             <li>Built an end-to-end motion side-channel attack recovering the PIN entered in a sample app from the phone’s own haptic feedback, since each keypress vibration perturbs the accelerometer and gyroscope, sensors readable without any app-granted permission.</li>
-            <li>Injected a Frida gadget into the live app process to timestamp every tap, labelling the sensor window just before and after each press for precise temporal alignment.</li>
-            <li>Collected motion traces in the background through a buffered <span class="mono">SensorEventListener</span> service, producing labelled per-digit datasets.</li>
-            <li>Benchmarked logistic regression, decision tree, random forest, and SVM in MLflow; random forest performed best at ~70% per digit on per-device models.</li>
-            <li>Shipped the capture, training, and inference workflow as a Flask tool used internally by the evaluation team.</li>
+            <li>Injected a Frida gadget into the live app process to timestamp every tap and collected motion traces in the background through a buffered <span class="mono">SensorEventListener</span> service, labelling the sensor window just before and after each press to build precisely aligned per-digit datasets.</li>
+            <li>Benchmarked logistic regression, decision tree, random forest, and SVM in MLflow, with random forest performing best at ~70% per digit on per-device models, and shipped the capture, training, and inference workflow as a Flask tool.</li>
             <li>Ran static and dynamic analysis on mobile payment applications, mapping findings to MPoC software protection requirements.</li>
             <li>Analyzed a published Samsung Galaxy A boot chain compromise, four chained CVEs running from a Little Kernel JPEG heap overflow through an Odin/PIT signing bypass to a Secure Monitor out-of-bounds read and arbitrary physical-to-virtual mapping, for a full secure boot bypass with TEE key extraction.</li>
-            <li>Studied and attempted to reproduce a public iOS sandbox escape abusing the <span class="mono">itunesstored</span> and <span class="mono">bookassetd</span> daemons to write files into restricted <span class="mono">/private/var</span> paths, which would not chain on the iPhone 11 available, most likely a device and iOS version mismatch.</li>
+            <li>Studied and attempted to reproduce a public iOS sandbox escape abusing the <span class="mono">itunesstored</span> and <span class="mono">bookassetd</span> daemons to write files into restricted <span class="mono">/private/var</span> paths.</li>
           </ul>
         </div>
         <span class="cv-date">Aug 2025 - Dec 2025</span>
@@ -641,7 +646,15 @@
         <div class="cv-main">
           <span class="cv-role">Master of Engineering, Cybersecurity</span>
           <span class="cv-org">University of Maryland, College Park</span>
-          <p class="cv-desc">GPA 3.8 / 4.0. Coursework across cloud security, binary exploitation, offensive security, and applied machine learning.</p>
+          <p class="cv-desc">GPA 3.8 / 4.0. Selected coursework:</p>
+          <div class="course-tags">
+            <span class="course-tag">Penetration Testing</span>
+            <span class="course-tag">Hacking of C Programs and Unix Binaries</span>
+            <span class="course-tag">ML Techniques Applied to Cybersecurity</span>
+            <span class="course-tag">Multimodal Foundation Models</span>
+            <span class="course-tag">Cloud Security</span>
+            <span class="course-tag">Digital Forensics</span>
+          </div>
         </div>
         <span class="cv-date">Expected Dec 2026</span>
       </div>
