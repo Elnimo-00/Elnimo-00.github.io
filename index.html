@@ -577,7 +577,7 @@
             <li>Injected a Frida gadget into the live app process to timestamp every tap and collected motion traces in the background through a buffered <span class="mono">SensorEventListener</span> service, labelling the sensor window just before and after each press to build precisely aligned per-digit datasets.</li>
             <li>Benchmarked logistic regression, decision tree, random forest, and SVM in MLflow, with random forest performing best at ~70% per digit on per-device models, and shipped the capture, training, and inference workflow as a Flask tool.</li>
             <li>Ran static and dynamic analysis on mobile payment applications, mapping findings to MPoC software protection requirements.</li>
-            <li>Analyzed a published Samsung Galaxy A boot chain compromise, four chained CVEs running from a Little Kernel JPEG heap overflow through an Odin/PIT signing bypass to a Secure Monitor out-of-bounds read and arbitrary physical-to-virtual mapping, for a full secure boot bypass with TEE key extraction.</li>
+            <li>Analyzed a published Samsung Galaxy A boot chain compromise, four chained CVEs running from a Little Kernel JPEG heap overflow to arbitrary physical-to-virtual mapping, for a full secure boot bypass with TEE key extraction.</li>
             <li>Studied and attempted to reproduce a public iOS sandbox escape abusing the <span class="mono">itunesstored</span> and <span class="mono">bookassetd</span> daemons to write files into restricted <span class="mono">/private/var</span> paths.</li>
           </ul>
         </div>
@@ -648,11 +648,11 @@
           <span class="cv-org">University of Maryland, College Park</span>
           <p class="cv-desc">GPA 3.8 / 4.0. Selected coursework:</p>
           <div class="course-tags">
-            <span class="course-tag">Penetration Testing</span>
-            <span class="course-tag">Hacking of C Programs and Unix Binaries</span>
-            <span class="course-tag">ML Techniques Applied to Cybersecurity</span>
             <span class="course-tag">Multimodal Foundation Models</span>
             <span class="course-tag">Cloud Security</span>
+            <span class="course-tag">ML Techniques Applied to Cybersecurity</span>
+            <span class="course-tag">Penetration Testing</span>
+            <span class="course-tag">Hacking of C Programs and Unix Binaries</span>
             <span class="course-tag">Digital Forensics</span>
           </div>
         </div>
@@ -674,14 +674,14 @@
         <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42352" target="_blank" rel="noopener">CVE-2026-42352 &#8599;</a>
         <span class="cve-meta">Server-side request forgery</span>
         <span class="cve-sev">pygeoapi &middot; CWE-918 &middot; CVSS 8.6 High &middot; fixed in 0.23.3</span>
-        <p class="cve-desc">Process execution requests to the OGC API accept a subscriber object, and the server calls the URLs it is given. An unauthenticated caller can point those callbacks at hosts reachable only from the server, using pygeoapi to reach internal HTTP services behind the network boundary.</p>
+        <p class="cve-desc">Process execution requests to the OGC API accept a subscriber object, and the server calls the URLs it is given. An unauthenticated caller can point those callbacks at internal HTTP services reachable only from the server.</p>
       </div>
 
       <div class="cve-item">
         <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
         <span class="cve-meta">Path traversal</span>
         <span class="cve-sev">pygeoapi &middot; CWE-22 &middot; CVSS 7.5 High &middot; fixed in 0.23.3</span>
-        <p class="cve-desc">The STAC FileSystemProvider resolves requested paths without confining them to the configured data directory, so traversal sequences in a request to a stac-collection resource walk outside it. On a deployment without protective middleware in front, that discloses directory contents from the host to an unauthenticated user.</p>
+        <p class="cve-desc">The STAC FileSystemProvider resolves requested paths without confining them to the configured data directory, so traversal sequences walk outside it. Without protective middleware in front, that discloses directory contents to an unauthenticated user.</p>
       </div>
     </section>
 
@@ -762,19 +762,19 @@
       <p class="panel-summary">Machine learning aimed at security problems, from malware to privacy to side channels.</p>
     </div>
     <div class="proj-list">
-      <a class="proj-item" href="https://github.com/Elnimo-00/Differential-Privacy-ML" target="_blank" rel="noopener">
-        <div class="proj-main">
-          <span class="proj-name">Differential Privacy ML (DP-SGD) <span class="proj-arrow">&#8599;</span></span>
-          <span class="proj-desc">Training neural nets that provably forget: DP-SGD on CIFAR-10, with a membership-inference attack to measure the privacy versus utility tradeoff.</span>
-        </div>
-        <div class="proj-tags"><span class="proj-tag">Privacy</span><span class="proj-tag">PyTorch</span></div>
-      </a>
       <a class="proj-item" href="https://github.com/joshuaalwin/Supplyx" target="_blank" rel="noopener">
         <div class="proj-main">
           <span class="proj-name">Supplyx, Malicious Package Detection <span class="proj-arrow">&#8599;</span></span>
           <span class="proj-desc">Real-time detection of malicious PyPI and npm packages: XGBoost over 13 behavioral signals, SHAP explanation on every verdict, 97.7% precision. An adversarial audit cut text-padding evasion from 99.8% to 0.2%.</span>
         </div>
         <div class="proj-tags"><span class="proj-tag">Supply Chain</span><span class="proj-tag">XGBoost</span><span class="proj-tag">MLOps</span></div>
+      </a>
+      <a class="proj-item" href="https://github.com/Elnimo-00/Differential-Privacy-ML" target="_blank" rel="noopener">
+        <div class="proj-main">
+          <span class="proj-name">Differential Privacy ML (DP-SGD) <span class="proj-arrow">&#8599;</span></span>
+          <span class="proj-desc">Training neural nets that provably forget: DP-SGD on CIFAR-10, with a membership-inference attack to measure the privacy versus utility tradeoff.</span>
+        </div>
+        <div class="proj-tags"><span class="proj-tag">Privacy</span><span class="proj-tag">PyTorch</span></div>
       </a>
       <a class="proj-item" href="https://github.com/Elnimo-00/malware-classifier" target="_blank" rel="noopener">
         <div class="proj-main">
