@@ -655,19 +655,17 @@
 
     <section class="cv-section" id="cves">
       <p class="section-label">CVEs</p>
-      <p class="cv-note">Two vulnerabilities I found and reported through coordinated disclosure in <a href="https://github.com/geopython/pygeoapi" target="_blank" rel="noopener">pygeoapi</a>, the OGC API reference implementation used to publish geospatial data. Both affect versions 0.23.0 to 0.23.2 and are fixed in 0.23.3.</p>
-
       <div class="cve-item">
         <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42352" target="_blank" rel="noopener">CVE-2026-42352 &#8599;</a>
         <span class="cve-meta">Server-side request forgery</span>
-        <span class="cve-sev">CWE-918 &middot; CVSS 8.6 High</span>
+        <span class="cve-sev">pygeoapi &middot; CWE-918 &middot; CVSS 8.6 High &middot; fixed in 0.23.3</span>
         <p class="cve-desc">Process execution requests to the OGC API accept a subscriber object, and the server calls the URLs it is given. An unauthenticated caller can point those callbacks at hosts reachable only from the server, using pygeoapi to reach internal HTTP services behind the network boundary.</p>
       </div>
 
       <div class="cve-item">
         <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
         <span class="cve-meta">Path traversal</span>
-        <span class="cve-sev">CWE-22 &middot; CVSS 7.5 High</span>
+        <span class="cve-sev">pygeoapi &middot; CWE-22 &middot; CVSS 7.5 High &middot; fixed in 0.23.3</span>
         <p class="cve-desc">The STAC FileSystemProvider resolves requested paths without confining them to the configured data directory, so traversal sequences in a request to a stac-collection resource walk outside it. On a deployment without protective middleware in front, that discloses directory contents from the host to an unauthenticated user.</p>
       </div>
     </section>
