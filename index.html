@@ -566,12 +566,14 @@
           <span class="cv-role">Security Evaluation Intern</span>
           <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
           <ul class="cv-bullets">
-            <li>Built an end-to-end motion side-channel attack recovering a mobile banking PIN from the phone’s own haptic feedback — each keypress vibration perturbs the accelerometer and gyroscope, sensors readable without any app-granted permission.</li>
+            <li>Built an end-to-end motion side-channel attack recovering the PIN entered in a sample app from the phone’s own haptic feedback, since each keypress vibration perturbs the accelerometer and gyroscope, sensors readable without any app-granted permission.</li>
             <li>Injected a Frida gadget into the live app process to timestamp every tap, labelling the sensor window just before and after each press for precise temporal alignment.</li>
             <li>Collected motion traces in the background through a buffered <span class="mono">SensorEventListener</span> service, producing labelled per-digit datasets.</li>
             <li>Benchmarked logistic regression, decision tree, random forest, and SVM in MLflow; random forest performed best at ~70% per digit on per-device models.</li>
             <li>Shipped the capture, training, and inference workflow as a Flask tool used internally by the evaluation team.</li>
             <li>Ran static and dynamic analysis on mobile payment applications, mapping findings to MPoC software protection requirements.</li>
+            <li>Analyzed a published Samsung Galaxy A boot chain compromise, four chained CVEs running from a Little Kernel JPEG heap overflow through an Odin/PIT signing bypass to a Secure Monitor out-of-bounds read and arbitrary physical-to-virtual mapping, for a full secure boot bypass with TEE key extraction.</li>
+            <li>Studied and attempted to reproduce a public iOS sandbox escape abusing the <span class="mono">itunesstored</span> and <span class="mono">bookassetd</span> daemons to write files into restricted <span class="mono">/private/var</span> paths, which would not chain on the iPhone 11 available, most likely a device and iOS version mismatch.</li>
           </ul>
         </div>
         <span class="cv-date">Aug 2025 - Dec 2025</span>
@@ -611,7 +613,7 @@
           <span class="cv-role">Industry Training Program, Rapid Labs</span>
           <span class="cv-org">Tata Consultancy Services, Bengaluru</span>
           <ul class="cv-bullets">
-            <li>Built a VADER-based sentiment analysis module in an NLP pipeline — tokenization, stop-word removal, stemming, then lexicon scoring.</li>
+            <li>Built a VADER-based sentiment analysis module in an NLP pipeline covering tokenization, stop-word removal, stemming, then lexicon scoring.</li>
             <li>Used Apache Spark for data cleaning and preprocessing, and tuned the classifier against curated datasets to improve reliability.</li>
           </ul>
         </div>
