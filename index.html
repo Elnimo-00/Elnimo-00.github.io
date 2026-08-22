@@ -69,10 +69,20 @@
       transform-origin: left center; pointer-events: none;
     }
 
+    /* the mark carries the same terracotta rule every section label uses */
     .logo {
       font-family: 'DM Mono', monospace;
       font-size: 13px; font-weight: 400;
-      letter-spacing: 0.06em; color: var(--text); text-decoration: none;
+      letter-spacing: 0.2em; color: var(--text); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .logo::before {
+      content: ''; width: 18px; height: 2px; background: var(--accent);
+      flex: none; transform-origin: left center;
+      transition: transform 0.4s var(--ease-out);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .logo:hover::before { transform: scaleX(1.55); }
     }
 
     .nav-links { list-style: none; display: flex; gap: 2rem; }
