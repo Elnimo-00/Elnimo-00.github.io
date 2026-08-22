@@ -210,6 +210,7 @@
       .cv-item.exp > .cv-main { grid-column: 2; grid-row: 2; }
 
       .cv-desc { max-width: 58ch; }
+      .cv-bullets { max-width: 58ch; }
     }
 
     .cv-item {
@@ -223,6 +224,21 @@
     .cv-role { font-size: 14px; font-weight: 400; }
     .cv-org { font-size: 13px; color: var(--muted); }
     .cv-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 52ch; margin-top: 4px; text-wrap: pretty; }
+
+    .cv-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 7px;
+      margin-top: 7px; max-width: 52ch;
+    }
+    .cv-bullets li {
+      position: relative; padding-left: 16px;
+      font-size: 13px; color: var(--muted); font-weight: 300; text-wrap: pretty;
+    }
+    /* a short terracotta rule instead of a dot, to match the hairline borders */
+    .cv-bullets .mono { font-family: 'DM Mono', monospace; font-size: 12px; }
+    .cv-bullets li::before {
+      content: ""; position: absolute; left: 0; top: 9px;
+      width: 7px; height: 1px; background: var(--accent); opacity: 0.6;
+    }
 
     .cv-date {
       font-family: 'DM Mono', monospace; font-size: 11px;
@@ -265,6 +281,17 @@
     .reveal.in .chip:nth-child(2) { animation-delay: 0.12s; }
     .chip:hover { border-color: var(--accent); color: var(--accent); }
     .cv-note { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 60ch; }
+
+    .cv-note a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s ease, border-color 0.2s ease; }
+    .cv-note a:hover { color: var(--accent); border-color: var(--accent); }
+    .cve-item {
+      padding: 1.4rem 0; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
+    }
+    .cve-item:last-child { border-bottom: 1px solid var(--border); }
+    .cve-meta { font-size: 13px; font-weight: 400; }
+    .cve-sev { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+    .cve-desc { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 62ch; text-wrap: pretty; }
 
     .pub-item {
       padding: 1.5rem 0; border-top: 1px solid var(--border);
@@ -538,8 +565,14 @@
         <div class="cv-main">
           <span class="cv-role">Security Evaluation Intern</span>
           <span class="cv-org">Brightsight by SGS, Delft, Netherlands</span>
-          <p class="cv-desc">Built an end-to-end motion side-channel attack recovering a mobile banking PIN from the phone’s own haptic feedback: each keypress vibration perturbs the accelerometer and gyroscope, sensors readable without any app-granted permission. Injected a Frida gadget into the live app process to timestamp every tap, labelling the sensor window just before and after each press, then benchmarked logistic regression, decision tree, random forest, and SVM in MLflow — random forest best at ~70% per digit on per-device models.</p>
-          <p class="cv-desc">Shipped the capture, training, and inference workflow as a Flask tool used internally by the evaluation team. Also ran static and dynamic analysis on mobile payment apps, mapping findings to MPoC software protection requirements.</p>
+          <ul class="cv-bullets">
+            <li>Built an end-to-end motion side-channel attack recovering a mobile banking PIN from the phone’s own haptic feedback — each keypress vibration perturbs the accelerometer and gyroscope, sensors readable without any app-granted permission.</li>
+            <li>Injected a Frida gadget into the live app process to timestamp every tap, labelling the sensor window just before and after each press for precise temporal alignment.</li>
+            <li>Collected motion traces in the background through a buffered <span class="mono">SensorEventListener</span> service, producing labelled per-digit datasets.</li>
+            <li>Benchmarked logistic regression, decision tree, random forest, and SVM in MLflow; random forest performed best at ~70% per digit on per-device models.</li>
+            <li>Shipped the capture, training, and inference workflow as a Flask tool used internally by the evaluation team.</li>
+            <li>Ran static and dynamic analysis on mobile payment applications, mapping findings to MPoC software protection requirements.</li>
+          </ul>
         </div>
         <span class="cv-date">Aug 2025 - Dec 2025</span>
       </div>
@@ -549,7 +582,10 @@
         <div class="cv-main">
           <span class="cv-role">Teaching Assistant</span>
           <span class="cv-org">University of Maryland, College Park</span>
-          <p class="cv-desc">Supported students through office hours, guidance on coursework, and grading of assignments and exams.</p>
+          <ul class="cv-bullets">
+            <li>Supported students through office hours and guidance on coursework.</li>
+            <li>Graded assignments and exams.</li>
+          </ul>
         </div>
         <span class="cv-date">Jan 2026 - Present</span>
       </div>
@@ -559,8 +595,12 @@
         <div class="cv-main">
           <span class="cv-role">Software Engineer, Project Management Office (Fortive account)</span>
           <span class="cv-org">Capgemini, Bengaluru</span>
-          <p class="cv-desc">Drove Agile/Scrum delivery for a global industrial client across Azure-based workstreams, facilitating sprint planning, standups, and retrospectives and tracking releases and dependencies to keep program management, engineering, and offshore teams aligned. Owned Supply Chain domain releases, and managed L1/L2 escalation workflows, driving triage of production issues between support and engineering through to resolution.</p>
-          <p class="cv-desc">Supported a client audit by coordinating and compiling required documentation and evidence across teams to meet auditor deadlines.</p>
+          <ul class="cv-bullets">
+            <li>Drove Agile/Scrum delivery for a global industrial client across Azure-based workstreams, facilitating sprint planning, standups, and retrospectives.</li>
+            <li>Tracked releases and dependencies to keep program management, engineering, and offshore teams aligned on scope and timelines, owning Supply Chain domain releases.</li>
+            <li>Managed L1/L2 escalation and release-tracking workflows, driving triage of production issues between support and engineering through to resolution.</li>
+            <li>Supported a client audit by coordinating and compiling required documentation and evidence across teams to meet auditor deadlines.</li>
+          </ul>
         </div>
         <span class="cv-date">Apr 2023 - Jul 2024</span>
       </div>
@@ -570,7 +610,10 @@
         <div class="cv-main">
           <span class="cv-role">Industry Training Program, Rapid Labs</span>
           <span class="cv-org">Tata Consultancy Services, Bengaluru</span>
-          <p class="cv-desc">Built a VADER-based sentiment analysis module in an NLP pipeline — tokenization, stop-word removal, stemming, then lexicon scoring — using Apache Spark for data cleaning and tuning the classifier against curated datasets to improve reliability.</p>
+          <ul class="cv-bullets">
+            <li>Built a VADER-based sentiment analysis module in an NLP pipeline — tokenization, stop-word removal, stemming, then lexicon scoring.</li>
+            <li>Used Apache Spark for data cleaning and preprocessing, and tuned the classifier against curated datasets to improve reliability.</li>
+          </ul>
         </div>
         <span class="cv-date">Apr 2022 - Jun 2022</span>
       </div>
@@ -580,7 +623,10 @@
         <div class="cv-main">
           <span class="cv-role">Software Engineering Intern</span>
           <span class="cv-org">Capital Quant Solutions, Bengaluru</span>
-          <p class="cv-desc">Wrote Python scripts to parse PDFs and extract and analyze data from financial reports, automating a manual document-processing workflow for the team.</p>
+          <ul class="cv-bullets">
+            <li>Wrote Python scripts to parse PDFs and extract and analyze data from financial reports.</li>
+            <li>Automated a manual document-processing workflow for the team.</li>
+          </ul>
         </div>
         <span class="cv-date">Feb 2021 - Apr 2021</span>
       </div>
@@ -609,11 +655,21 @@
 
     <section class="cv-section" id="cves">
       <p class="section-label">CVEs</p>
-      <div class="chip-row">
-        <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
+      <p class="cv-note">Two vulnerabilities I found and reported through coordinated disclosure in <a href="https://github.com/geopython/pygeoapi" target="_blank" rel="noopener">pygeoapi</a>, the OGC API reference implementation used to publish geospatial data. Both affect versions 0.23.0 to 0.23.2 and are fixed in 0.23.3.</p>
+
+      <div class="cve-item">
         <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42352" target="_blank" rel="noopener">CVE-2026-42352 &#8599;</a>
+        <span class="cve-meta">Server-side request forgery</span>
+        <span class="cve-sev">CWE-918 &middot; CVSS 8.6 High</span>
+        <p class="cve-desc">Process execution requests to the OGC API accept a subscriber object, and the server calls the URLs it is given. An unauthenticated caller can point those callbacks at hosts reachable only from the server, using pygeoapi to reach internal HTTP services behind the network boundary.</p>
       </div>
-      <p class="cv-note">Identified and responsibly disclosed two security vulnerabilities, each assigned a CVE identifier.</p>
+
+      <div class="cve-item">
+        <a class="chip" href="https://nvd.nist.gov/vuln/detail/CVE-2026-42351" target="_blank" rel="noopener">CVE-2026-42351 &#8599;</a>
+        <span class="cve-meta">Path traversal</span>
+        <span class="cve-sev">CWE-22 &middot; CVSS 7.5 High</span>
+        <p class="cve-desc">The STAC FileSystemProvider resolves requested paths without confining them to the configured data directory, so traversal sequences in a request to a stac-collection resource walk outside it. On a deployment without protective middleware in front, that discloses directory contents from the host to an unauthenticated user.</p>
+      </div>
     </section>
 
     <section class="cv-section" id="publications">
