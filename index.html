@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nimal Kurien Thomas, Security &amp; Engineering</title>
-  <meta name="description" content="Nimal Kurien Thomas, security and engineering. Cloud security, pentesting, binary exploitation, DevSecOps, and applied machine learning projects." />
+  <title>Nimal Kurien Thomas, Software Engineering &amp; Security</title>
+  <meta name="description" content="Nimal Kurien Thomas, software engineer. Backend services, cloud infrastructure, ML pipelines and DevOps, with a security specialism behind all of it." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -165,13 +165,12 @@
     .hero-links     { animation: rise 0.6s var(--ease-out) 0.22s backwards; }
 
     /* the badges land one after another rather than as a slab */
-    .certs-block .section-label { animation: rise 0.6s var(--ease-out) 0.28s backwards; }
-    .certs-row .cert { animation: rise 0.55s var(--ease-out) backwards; }
-    .certs-row .cert:nth-child(1) { animation-delay: 0.34s; }
-    .certs-row .cert:nth-child(2) { animation-delay: 0.39s; }
-    .certs-row .cert:nth-child(3) { animation-delay: 0.44s; }
-    .certs-row .cert:nth-child(4) { animation-delay: 0.49s; }
-    .certs-row .cert:nth-child(5) { animation-delay: 0.54s; }
+    .certs-block.reveal.in .certs-row .cert { animation: rise 0.55s var(--ease-out) backwards; }
+    .certs-block.reveal.in .certs-row .cert:nth-child(1) { animation-delay: 0.06s; }
+    .certs-block.reveal.in .certs-row .cert:nth-child(2) { animation-delay: 0.11s; }
+    .certs-block.reveal.in .certs-row .cert:nth-child(3) { animation-delay: 0.16s; }
+    .certs-block.reveal.in .certs-row .cert:nth-child(4) { animation-delay: 0.21s; }
+    .certs-block.reveal.in .certs-row .cert:nth-child(5) { animation-delay: 0.26s; }
 
     @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
@@ -526,10 +525,10 @@
 <div class="hero">
   <h1>
     <span class="h1-line"><span>Nimal Kurien Thomas</span></span>
-    <span class="h1-line"><em>security &amp; engineering</em></span>
+    <span class="h1-line"><em>software engineering &amp; security</em></span>
   </h1>
-  <p>Security and software engineer working across offensive security, cloud and cloud security, DevOps and DevSecOps, backend engineering, and AI and AI security. I build systems, then test how they fail.</p>
-  <p>Two CVEs, two IEEE papers, and an MEng in Cybersecurity at the University of Maryland.</p>
+  <p>Software engineer building backend services, cloud infrastructure and ML pipelines, mostly in Python and Go. I secure what I build, which is a large part of why it holds up.</p>
+  <p>Two CVEs, two IEEE papers, and an MEng in Cybersecurity at the University of Maryland, wrapping up this December.</p>
   <p>Based in College Park, Maryland.</p>
   <div class="hero-links">
     <a href="https://github.com/Elnimo-00" target="_blank" rel="noopener">GitHub &#8599;</a>
@@ -538,40 +537,6 @@
   </div>
 </div>
 
-<div class="certs-block">
-  <p class="section-label">Certifications</p>
-  <div class="certs-row">
-    <a class="cert" href="https://credentials.offsec.com/2abd3784-1c12-49ec-8102-0b5d994129b2#acc.ruh2PTEH"
-       target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+), verify with OffSec">
-      <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
-      <span class="cert-label">OSCP+</span>
-    </a>
-
-    <a class="cert" href="https://credentials.offsec.com/d73c3373-4e0c-4289-a8f8-cc684b368029#acc.bukZvz1o"
-       target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP), verify with OffSec">
-      <img src="assets/badges/oscp.png" alt="OffSec Certified Professional (OSCP)" />
-      <span class="cert-label">OSCP</span>
-    </a>
-
-    <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
-       target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert, verify on Credly">
-      <img src="assets/badges/htb-coae.png" alt="HTB Certified Offensive AI Expert (HTB COAE)" />
-      <span class="cert-label">HTB COAE</span>
-    </a>
-
-    <a class="cert" href="https://www.credly.com/badges/5f25846e-7da8-4df2-866c-069ec7f005a2"
-       target="_blank" rel="noopener" title="AWS Certified Solutions Architect, Associate, verify on Credly">
-      <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect, Associate" />
-      <span class="cert-label">AWS SAA</span>
-    </a>
-
-    <a class="cert" href="https://cp.certmetrics.com/CompTIA/en/public/verify/credential/BQFRF02QZEB4QWKK"
-       target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701), verify with CompTIA">
-      <img src="assets/badges/comptia-secplus.png" alt="CompTIA Security+ ce Certification" />
-      <span class="cert-label">Security+</span>
-    </a>
-  </div>
-</div>
 
 <div class="cv-grid">
   <div class="cv-col">
@@ -717,21 +682,21 @@
 <div class="tabs-outer" id="work">
   <p class="section-label">Work</p>
   <div class="tab-bar" role="tablist">
-    <button class="tab-btn active" data-tab="cloud">Cloud &amp; Cloud Security<span class="count">4</span></button>
+    <button class="tab-btn active" data-tab="cloud">Cloud &amp; Infrastructure<span class="count">4</span></button>
+    <button class="tab-btn" data-tab="devsecops">Platform &amp; DevOps<span class="count">2</span></button>
     <button class="tab-btn" data-tab="mlai">ML / AI<span class="count">8</span></button>
+    <button class="tab-btn" data-tab="api">API &amp; AI Security<span class="count">1</span></button>
     <button class="tab-btn" data-tab="pentest">Pentesting<span class="count">2</span></button>
-    <button class="tab-btn" data-tab="devsecops">DevOps / DevSecOps<span class="count">2</span></button>
     <button class="tab-btn" data-tab="binexp">Binary Exploitation<span class="count">1</span></button>
     <button class="tab-btn" data-tab="dfir">DFIR<span class="count">1</span></button>
-    <button class="tab-btn" data-tab="api">API &amp; AI Security<span class="count">1</span></button>
     <span class="tab-indicator" aria-hidden="true"></span>
   </div>
 
   <!-- CLOUD -->
   <div class="tab-panel active" id="tab-cloud">
     <div class="panel-header">
-      <h2>Cloud &amp; Cloud Security</h2>
-      <p class="panel-summary">Building and breaking AWS environments, from reference architectures to misconfiguration chains.</p>
+      <h2>Cloud &amp; Infrastructure</h2>
+      <p class="panel-summary">AWS environments built as code, from deployable reference architectures to hardened baselines and the audits behind them.</p>
     </div>
     <div class="proj-list">
       <a class="proj-item" href="https://github.com/Elnimo-00/scalable-secure-ecommerce-aws" target="_blank" rel="noopener">
@@ -769,7 +734,7 @@
   <div class="tab-panel" id="tab-mlai">
     <div class="panel-header">
       <h2>ML / AI</h2>
-      <p class="panel-summary">Machine learning aimed at security problems, from malware to privacy to side channels.</p>
+      <p class="panel-summary">Models and the pipelines around them, trained, tracked and served rather than left in a notebook.</p>
     </div>
     <div class="proj-list">
       <a class="proj-item" href="https://github.com/joshuaalwin/Supplyx" target="_blank" rel="noopener">
@@ -859,8 +824,8 @@
   <!-- DEVOPS / DEVSECOPS -->
   <div class="tab-panel" id="tab-devsecops">
     <div class="panel-header">
-      <h2>DevOps / DevSecOps</h2>
-      <p class="panel-summary">Security baked into pipelines and platforms, from scanning gates to signed artifacts.</p>
+      <h2>Platform &amp; DevOps</h2>
+      <p class="panel-summary">Deployment pipelines and Kubernetes platforms, with the release gates, signing and rollbacks that keep them honest.</p>
     </div>
     <div class="proj-list">
       <a class="proj-item" href="https://github.com/Elnimo-00/secure-pipeline-demo" target="_blank" rel="noopener">
@@ -934,6 +899,42 @@
 </div>
 
 <div class="band">
+
+<div class="certs-block">
+  <p class="section-label">Certifications</p>
+  <div class="certs-row">
+    <a class="cert" href="https://credentials.offsec.com/2abd3784-1c12-49ec-8102-0b5d994129b2#acc.ruh2PTEH"
+       target="_blank" rel="noopener" title="OffSec Certified Professional+ (OSCP+), verify with OffSec">
+      <img src="assets/badges/oscp-plus.png" alt="OffSec Certified Professional+ (OSCP+)" />
+      <span class="cert-label">OSCP+</span>
+    </a>
+
+    <a class="cert" href="https://credentials.offsec.com/d73c3373-4e0c-4289-a8f8-cc684b368029#acc.bukZvz1o"
+       target="_blank" rel="noopener" title="OffSec Certified Professional (OSCP), verify with OffSec">
+      <img src="assets/badges/oscp.png" alt="OffSec Certified Professional (OSCP)" />
+      <span class="cert-label">OSCP</span>
+    </a>
+
+    <a class="cert" href="https://www.credly.com/badges/5e23ddd2-8da5-4d53-8533-a516417f838f"
+       target="_blank" rel="noopener" title="HTB Certified Offensive AI Expert, verify on Credly">
+      <img src="assets/badges/htb-coae.png" alt="HTB Certified Offensive AI Expert (HTB COAE)" />
+      <span class="cert-label">HTB COAE</span>
+    </a>
+
+    <a class="cert" href="https://www.credly.com/badges/5f25846e-7da8-4df2-866c-069ec7f005a2"
+       target="_blank" rel="noopener" title="AWS Certified Solutions Architect, Associate, verify on Credly">
+      <img src="assets/badges/aws-saa.png" alt="AWS Certified Solutions Architect, Associate" />
+      <span class="cert-label">AWS SAA</span>
+    </a>
+
+    <a class="cert" href="https://cp.certmetrics.com/CompTIA/en/public/verify/credential/BQFRF02QZEB4QWKK"
+       target="_blank" rel="noopener" title="CompTIA Security+ ce (SY0-701), verify with CompTIA">
+      <img src="assets/badges/comptia-secplus.png" alt="CompTIA Security+ ce Certification" />
+      <span class="cert-label">Security+</span>
+    </a>
+  </div>
+</div>
+
   <section class="cv-section" id="contact">
     <p class="section-label">Contact</p>
     <p class="contact-note">The fastest way to reach me is email. Either address works.</p>
@@ -1017,7 +1018,7 @@
 
   // sections rise as they scroll into view, once each
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const sections = document.querySelectorAll('.cv-section, .tabs-outer');
+  const sections = document.querySelectorAll('.cv-section, .tabs-outer, .certs-block');
   if (!reduced && 'IntersectionObserver' in window) {
     sections.forEach(el => el.classList.add('reveal'));
     const io = new IntersectionObserver((entries, obs) => {
